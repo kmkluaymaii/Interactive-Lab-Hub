@@ -112,22 +112,25 @@ BG_COLOR = hsb(220, 20, 15)
 STEM_COLOR = hsb(120, 60, 40)
 LEAF_COLOR = hsb(120, 70, 60)
 
-# Orchid petals
-PETAL_FILL = hsb(285, 50, 90)
-PETAL_STROKE = hsb(280, 75, 50)
-PETAL_HIGHLIGHT = hsb(285, 25, 100)
+# Pink orchid petals
+PETAL_FILL = hsb(325, 55, 95)
+PETAL_STROKE = hsb(320, 75, 55)
+PETAL_HIGHLIGHT = hsb(330, 25, 100)
 
 # Orchid center / lip
 CENTER_COLOR = hsb(45, 90, 90)
-LIP_COLOR = hsb(300, 75, 70)
-LIP_DARK = hsb(285, 90, 45)
+LIP_COLOR = hsb(320, 80, 80)
+LIP_DARK = hsb(315, 85, 50)
 LIP_HIGHLIGHT = hsb(45, 80, 95)
 
-# Bud
-BUD_COLOR = hsb(285, 55, 65)
-BUD_TIP_COLOR = hsb(275, 75, 40)
+# Pink bud
+BUD_COLOR = hsb(325, 60, 70)
+BUD_TIP_COLOR = hsb(315, 75, 45)
 
 TEXT_COLOR = (230, 230, 230)
+
+
+
 
 
 # -------------------------------------------------------
