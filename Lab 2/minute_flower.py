@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Flower Clock - Minute Version
+Orchid Flower Clock - Minute Version
 
-The flower blooms gradually over 60 minutes.
+The orchid blooms gradually over 60 minutes.
 
 00:00  -> closed bud
 15:00  -> partially bloomed
@@ -10,6 +10,8 @@ The flower blooms gradually over 60 minutes.
 45:00  -> mostly bloomed
 59:59  -> fully bloomed
 00:00  -> resets to closed bud
+
+Runs on the Adafruit Mini PiTFT 135x240 ST7789 display.
 """
 
 import math
@@ -21,7 +23,9 @@ from PIL import Image, ImageDraw
 import adafruit_rgb_display.st7789 as st7789
 
 
-# ------------------------------------------------------- display setup
+# -------------------------------------------------------
+# DISPLAY SETUP
+# -------------------------------------------------------
 
 cs_pin = digitalio.DigitalInOut(board.CE0)
 dc_pin = digitalio.DigitalInOut(board.D25)
@@ -52,10 +56,13 @@ else:
     HEIGHT = disp.height
 
 
-# ---------------------------------------------------------------- colors
+# -------------------------------------------------------
+# COLORS
+# -------------------------------------------------------
 
 def hsb(h, s, b):
     """Convert HSB/HSV to RGB."""
+
     h = (h % 360) / 60.0
     s /= 100.0
     b /= 100.0
@@ -86,6 +93,7 @@ def hsb(h, s, b):
 
 def blend(fg, bg, alpha_pct):
     """Blend two colors."""
+
     a = max(0.0, min(1.0, alpha_pct / 100.0))
 
     return tuple(
@@ -94,29 +102,55 @@ def blend(fg, bg, alpha_pct):
     )
 
 
+# -------------------------------------------------------
+# ORCHID COLORS
+# -------------------------------------------------------
+
 BG_COLOR = hsb(220, 20, 15)
+
+# Stem and leaves
 STEM_COLOR = hsb(120, 60, 40)
 LEAF_COLOR = hsb(120, 70, 60)
-CENTER_COLOR = hsb(45, 90, 80)
 
-PETAL_FILL = hsb(220, 50, 85)
-PETAL_STROKE = hsb(220, 80, 40)
-PETAL_HIGHLIGHT = hsb(220, 30, 95)
+# Orchid petals
+PETAL_FILL = hsb(285, 50, 90)
+PETAL_STROKE = hsb(280, 75, 50)
+PETAL_HIGHLIGHT = hsb(285, 25, 100)
 
-BUD_COLOR = hsb(120, 40, 50)
-BUD_TIP_COLOR = hsb(120, 60, 30)
+# Orchid center / lip
+CENTER_COLOR = hsb(45, 90, 90)
+LIP_COLOR = hsb(300, 75, 70)
+LIP_DARK = hsb(285, 90, 45)
+LIP_HIGHLIGHT = hsb(45, 80, 95)
+
+# Bud
+BUD_COLOR = hsb(285, 55, 65)
+BUD_TIP_COLOR = hsb(275, 75, 40)
 
 TEXT_COLOR = (230, 230, 230)
 
 
-# ------------------------------------------------------------ geometry
+# -------------------------------------------------------
+# GEOMETRY
+# -------------------------------------------------------
 
 def transform(lx, ly, angle, ox, oy):
     """Rotate and translate a point."""
-    gx = lx * math.cos(angle) - ly * math.sin(angle)
-    gy = lx * math.sin(angle) + ly * math.cos(angle)
 
-    return (ox + gx, oy + gy)
+    gx = (
+        lx * math.cos(angle)
+        - ly * math.sin(angle)
+    )
+
+    gy = (
+        lx * math.sin(angle)
+        + ly * math.cos(angle)
+    )
+
+    return (
+        ox + gx,
+        oy + gy
+    )
 
 
 def ellipse_points(
@@ -133,19 +167,36 @@ def ellipse_points(
     pts = []
 
     for i in range(n):
-        t = 2 * math.pi * i / n
 
-        lx = rx * math.cos(t)
-        ly = ry * math.sin(t) + shift_y
+        t = (
+            2 * math.pi * i / n
+        )
+
+        lx = (
+            rx * math.cos(t)
+        )
+
+        ly = (
+            ry * math.sin(t)
+            + shift_y
+        )
 
         pts.append(
-            transform(lx, ly, angle, ox, oy)
+            transform(
+                lx,
+                ly,
+                angle,
+                ox,
+                oy
+            )
         )
 
     return pts
 
 
-# ---------------------------------------------------------------- scale
+# -------------------------------------------------------
+# SCALE
+# -------------------------------------------------------
 
 SCALE = 0.42
 
@@ -154,10 +205,10 @@ FLOWER_SIZE = 60 * SCALE
 STEM_TOP = 20 * SCALE
 STEM_BOTTOM = 150 * SCALE
 
-PETAL_COUNT = 8
 
-
-# ---------------------------------------------------------- MINUTE TIMER
+# -------------------------------------------------------
+# MINUTE TIMER
+# -------------------------------------------------------
 
 def bloom_progress(now=None):
     """
@@ -169,8 +220,7 @@ def bloom_progress(now=None):
     0:45 -> 45.0
     0:59 -> 59.0
 
-    The flower automatically resets at the beginning
-    of every hour.
+    The flower resets at the beginning of every hour.
     """
 
     if now is None:
@@ -178,28 +228,41 @@ def bloom_progress(now=None):
 
     local = time.localtime(now)
 
-    # Include seconds so blooming is smooth.
+    # Include seconds so the flower opens smoothly.
     minutes_elapsed = (
-        local.tm_min +
-        local.tm_sec / 60.0
+        local.tm_min
+        + local.tm_sec / 60.0
     )
 
     return minutes_elapsed
 
 
-# -------------------------------------------------------------- leaves
+# -------------------------------------------------------
+# LEAVES
+# -------------------------------------------------------
 
-def draw_leaves(draw, cx, cy, minute_value):
+def draw_leaves(
+    draw,
+    cx,
+    cy,
+    minute_value
+):
     """
-    Add leaves as the flower grows.
+    Add leaves as the orchid grows.
 
     A new leaf appears every 15 minutes.
+    Maximum of 4 leaves.
     """
 
-    num_leaves = int(minute_value // 15) + 1
+    num_leaves = (
+        int(minute_value // 15)
+        + 1
+    )
 
-    # Maximum 4 leaves
-    num_leaves = min(num_leaves, 4)
+    num_leaves = min(
+        num_leaves,
+        4
+    )
 
     for i in range(num_leaves):
 
@@ -208,24 +271,29 @@ def draw_leaves(draw, cx, cy, minute_value):
             + i * (15 * SCALE)
         )
 
-        side = -1 if i % 2 == 0 else 1
+        side = (
+            -1 if i % 2 == 0
+            else 1
+        )
 
         leaf_x = (
-            side *
-            ((10 + i * 3) * SCALE)
+            side
+            * ((10 + i * 3) * SCALE)
         )
 
         leaf_rot = (
-            side *
-            (0.2 + i * 0.1)
+            side
+            * (0.2 + i * 0.1)
         )
 
         leaf_w = (
-            (20 + i * 2) * SCALE
+            (20 + i * 2)
+            * SCALE
         )
 
         leaf_h = (
-            (12 + i * 1) * SCALE
+            (12 + i)
+            * SCALE
         )
 
         pts = ellipse_points(
@@ -243,69 +311,78 @@ def draw_leaves(draw, cx, cy, minute_value):
         )
 
 
-# -------------------------------------------------------------- petals
+# -------------------------------------------------------
+# ORCHID PETAL
+# -------------------------------------------------------
 
-def draw_petal(
+def draw_orchid_petal(
     draw,
     cx,
     cy,
     angle,
-    petal_dist,
-    cur_w,
-    cur_h
+    distance,
+    width,
+    height
 ):
-    """Draw one flower petal."""
+    """
+    Draw one broad, rounded orchid petal.
+    """
 
-    # Dark outline
-    stroke_pts = ellipse_points(
-        cur_w / 2 * 1.18,
-        cur_h / 2 * 1.10,
+    # Dark purple outer edge
+    outer = ellipse_points(
+        width / 2,
+        height / 2,
         angle,
         cx,
         cy,
-        shift_y=-petal_dist,
-        n=16
+        shift_y=-distance,
+        n=20
     )
 
     draw.polygon(
-        stroke_pts,
+        outer,
         fill=PETAL_STROKE
     )
 
-    # Main petal
-    fill_pts = ellipse_points(
-        cur_w / 2,
-        cur_h / 2,
+    # Main purple petal
+    inner = ellipse_points(
+        width / 2 * 0.88,
+        height / 2 * 0.88,
         angle,
         cx,
         cy,
-        shift_y=-petal_dist,
+        shift_y=-distance,
+        n=20
+    )
+
+    draw.polygon(
+        inner,
+        fill=PETAL_FILL
+    )
+
+    # Light center highlight
+    highlight = ellipse_points(
+        width * 0.30,
+        height * 0.32,
+        angle,
+        cx,
+        cy,
+        shift_y=(
+            -distance
+            - height * 0.08
+        ),
         n=16
     )
 
     draw.polygon(
-        fill_pts,
-        fill=PETAL_FILL
-    )
-
-    # Highlight
-    hi_pts = ellipse_points(
-        cur_w * 0.6 / 2,
-        cur_h * 0.7 / 2,
-        angle,
-        cx,
-        cy,
-        shift_y=-petal_dist + cur_h * 0.1,
-        n=12
-    )
-
-    draw.polygon(
-        hi_pts,
+        highlight,
         fill=PETAL_HIGHLIGHT
     )
 
 
-# --------------------------------------------------------- flower
+# -------------------------------------------------------
+# ORCHID FLOWER
+# -------------------------------------------------------
 
 def draw_minutes_flower(
     draw,
@@ -314,27 +391,28 @@ def draw_minutes_flower(
     minute_value
 ):
     """
-    Draw flower based on progress through the hour.
+    Draw an orchid based on progress through the hour.
 
-    bloom:
-        0.0 = closed
-        1.0 = fully open
+    0.0 = closed
+    1.0 = fully open
     """
 
-    # -----------------------------------------
-    # Calculate bloom progress
-    # -----------------------------------------
+    # ---------------------------------------------------
+    # BLOOM PROGRESS
+    # ---------------------------------------------------
 
-    bloom = minute_value / 59.999
+    bloom = (
+        minute_value / 59.999
+    )
 
     bloom = max(
         0.0,
         min(1.0, bloom)
     )
 
-    # -----------------------------------------
-    # Stem
-    # -----------------------------------------
+    # ---------------------------------------------------
+    # STEM
+    # ---------------------------------------------------
 
     draw.line(
         (
@@ -350,9 +428,9 @@ def draw_minutes_flower(
         )
     )
 
-    # -----------------------------------------
-    # Leaves
-    # -----------------------------------------
+    # ---------------------------------------------------
+    # LEAVES
+    # ---------------------------------------------------
 
     draw_leaves(
         draw,
@@ -361,87 +439,194 @@ def draw_minutes_flower(
         minute_value
     )
 
-    # -----------------------------------------
-    # Flower center
-    # -----------------------------------------
+    # ---------------------------------------------------
+    # ORCHID PETAL SIZE
+    # ---------------------------------------------------
 
-    center_r = (
-        6 + bloom * 15
-    ) * SCALE / 2
-
-    draw.ellipse(
-        (
-            cx - center_r,
-            cy - center_r,
-            cx + center_r,
-            cy + center_r
-        ),
-        fill=CENTER_COLOR
+    base_radius = (
+        FLOWER_SIZE * 0.15
     )
 
-    # -----------------------------------------
-    # Petals
-    # -----------------------------------------
-
-    base_radius = FLOWER_SIZE * 0.3
-
     bloom_radius = (
-        FLOWER_SIZE *
-        (0.3 + bloom * 0.4)
+        FLOWER_SIZE
+        * (0.15 + bloom * 0.45)
     )
 
     petal_w = (
-        20 + bloom * 15
-    ) * SCALE
+        (28 + bloom * 28)
+        * SCALE
+    )
 
     petal_h = (
-        40 + bloom * 30
-    ) * SCALE
+        (38 + bloom * 30)
+        * SCALE
+    )
 
     petal_dist = (
-        base_radius +
-        (bloom_radius - base_radius) * bloom
+        base_radius
+        + (
+            bloom_radius
+            - base_radius
+        ) * bloom
     )
 
     cur_w = (
-        petal_w *
-        (0.3 + 0.7 * bloom)
+        petal_w
+        * (0.35 + 0.65 * bloom)
     )
 
     cur_h = (
-        petal_h *
-        (0.4 + 0.6 * bloom)
+        petal_h
+        * (0.40 + 0.60 * bloom)
     )
 
-    # Draw all petals
-    for i in range(PETAL_COUNT):
+    # ---------------------------------------------------
+    # TOP SEPAL
+    # ---------------------------------------------------
 
-        angle = (
-            2 * math.pi *
-            i /
-            PETAL_COUNT
+    draw_orchid_petal(
+        draw,
+        cx,
+        cy,
+        0,
+        petal_dist * 0.9,
+        cur_w * 0.85,
+        cur_h * 1.15
+    )
+
+    # ---------------------------------------------------
+    # LEFT LARGE PETAL
+    # ---------------------------------------------------
+
+    draw_orchid_petal(
+        draw,
+        cx,
+        cy,
+        math.radians(72),
+        petal_dist,
+        cur_w * 1.25,
+        cur_h
+    )
+
+    # ---------------------------------------------------
+    # RIGHT LARGE PETAL
+    # ---------------------------------------------------
+
+    draw_orchid_petal(
+        draw,
+        cx,
+        cy,
+        math.radians(-72),
+        petal_dist,
+        cur_w * 1.25,
+        cur_h
+    )
+
+    # ---------------------------------------------------
+    # BOTTOM LEFT SEPAL
+    # ---------------------------------------------------
+
+    draw_orchid_petal(
+        draw,
+        cx,
+        cy,
+        math.radians(150),
+        petal_dist * 0.9,
+        cur_w * 0.8,
+        cur_h * 0.9
+    )
+
+    # ---------------------------------------------------
+    # BOTTOM RIGHT SEPAL
+    # ---------------------------------------------------
+
+    draw_orchid_petal(
+        draw,
+        cx,
+        cy,
+        math.radians(-150),
+        petal_dist * 0.9,
+        cur_w * 0.8,
+        cur_h * 0.9
+    )
+
+    # ---------------------------------------------------
+    # ORCHID CENTER / LIP
+    # ---------------------------------------------------
+
+    if bloom > 0.15:
+
+        lip_w = (
+            (16 + bloom * 14)
+            * SCALE
         )
 
-        draw_petal(
-            draw,
+        lip_h = (
+            (18 + bloom * 18)
+            * SCALE
+        )
+
+        # Dark throat
+        lip_outer = ellipse_points(
+            lip_w,
+            lip_h,
+            0,
             cx,
-            cy,
-            angle,
-            petal_dist,
-            cur_w,
-            cur_h
+            cy + 3 * SCALE,
+            n=16
         )
 
-    # -----------------------------------------
-    # Bud overlay
-    # -----------------------------------------
+        draw.polygon(
+            lip_outer,
+            fill=LIP_DARK
+        )
 
-    if bloom < 0.3:
+        # Purple/pink lip
+        lip_inner = ellipse_points(
+            lip_w * 0.72,
+            lip_h * 0.72,
+            0,
+            cx,
+            cy + 4 * SCALE,
+            n=16
+        )
+
+        draw.polygon(
+            lip_inner,
+            fill=LIP_COLOR
+        )
+
+        # Yellow/orange throat
+        throat_w = (
+            (5 + bloom * 5)
+            * SCALE
+        )
+
+        throat_h = (
+            (6 + bloom * 7)
+            * SCALE
+        )
+
+        draw.ellipse(
+            (
+                cx - throat_w,
+                cy - 1 * SCALE,
+                cx + throat_w,
+                cy + throat_h
+            ),
+            fill=LIP_HIGHLIGHT
+        )
+
+    # ---------------------------------------------------
+    # CLOSED-BUD OVERLAY
+    # ---------------------------------------------------
+
+    if bloom < 0.30:
 
         alpha = (
-            1 -
-            bloom * 3
-        ) * 80
+            (1 - bloom * 3)
+            * 80
+        )
 
         rx = (
             25 * SCALE
@@ -452,8 +637,7 @@ def draw_minutes_flower(
         ) / 2
 
         by = (
-            cy -
-            10 * SCALE
+            cy - 10 * SCALE
         )
 
         draw.ellipse(
@@ -470,11 +654,11 @@ def draw_minutes_flower(
             )
         )
 
-        # Bud tip
+        # Darker bud tip
         alpha_tip = (
-            1 -
-            bloom * 3
-        ) * 90
+            (1 - bloom * 3)
+            * 90
+        )
 
         rx2 = (
             15 * SCALE
@@ -485,8 +669,7 @@ def draw_minutes_flower(
         ) / 2
 
         by2 = (
-            cy -
-            25 * SCALE
+            cy - 25 * SCALE
         )
 
         draw.ellipse(
@@ -504,7 +687,9 @@ def draw_minutes_flower(
         )
 
 
-# --------------------------------------------------------------- main
+# -------------------------------------------------------
+# MAIN
+# -------------------------------------------------------
 
 def main():
 
@@ -515,22 +700,25 @@ def main():
 
     draw = ImageDraw.Draw(image)
 
+    # Center of flower
     cx = WIDTH // 2
 
-    # Flower head
+    # Flower head near the top
     cy = 40
 
     while True:
 
-        # -----------------------------------------
+        # -----------------------------------------------
         # Get current minute
-        # -----------------------------------------
+        # -----------------------------------------------
 
-        minutes_elapsed = bloom_progress()
+        minutes_elapsed = (
+            bloom_progress()
+        )
 
-        # -----------------------------------------
+        # -----------------------------------------------
         # Clear screen
-        # -----------------------------------------
+        # -----------------------------------------------
 
         draw.rectangle(
             (
@@ -542,9 +730,9 @@ def main():
             fill=BG_COLOR
         )
 
-        # -----------------------------------------
-        # Draw flower
-        # -----------------------------------------
+        # -----------------------------------------------
+        # Draw orchid
+        # -----------------------------------------------
 
         draw_minutes_flower(
             draw,
@@ -553,9 +741,9 @@ def main():
             minutes_elapsed
         )
 
-        # -----------------------------------------
+        # -----------------------------------------------
         # Display minute
-        # -----------------------------------------
+        # -----------------------------------------------
 
         draw.text(
             (
@@ -566,9 +754,9 @@ def main():
             fill=TEXT_COLOR
         )
 
-        # -----------------------------------------
-        # Send to display
-        # -----------------------------------------
+        # -----------------------------------------------
+        # Send image to display
+        # -----------------------------------------------
 
         disp.image(image)
 
