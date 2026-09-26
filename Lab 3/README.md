@@ -168,12 +168,45 @@ There is no correct value. A system that takes drink orders and a system that li
 Storyboard and/or use a Verplank diagram to design a speech-enabled device. (Stuck? Make a device that talks for dogs. If that is too stupid, find an application that is better than that.)
 
 \*\***Post your storyboard and diagram here.**\*\*
+Our idea for a speech-enabled device is creating a bedside voice assistant that acts like a personal storyteller. The interaction is intentionally hands-free so the user can stay comfortable in bed, and hopefully if done well, can insure a good night's sleep for users of all ages. 
+Verplank Diagram: 
+<img width="873" height="454" alt="Screenshot 2026-09-26 at 10 37 48 AM" src="https://github.com/user-attachments/assets/35113f5f-a722-43e8-8966-0fb33317c53e" />
+<img width="737" height="488" alt="Screenshot 2026-09-24 at 9 05 19 PM" src="https://github.com/user-attachments/assets/9b002401-8106-4c64-8be6-2d521d75ed47" />
+
+Storyboard: 
+<img width="538" height="487" alt="Screenshot 2026-09-24 at 8 58 56 PM" src="https://github.com/user-attachments/assets/fd41de42-fe6e-41a6-9f62-02a423116da4" />
+
 
 Write out what you imagine the dialogue to be. Use cards, post-its, or whatever method helps you develop alternatives or group responses.
-
+To chart out how the dialogue should function, we first made a block diagram to showcase it: 
 \*\***Please describe and document your process.**\*\*
+<img width="868" height="455" alt="Screenshot 2026-09-26 at 10 38 17 AM" src="https://github.com/user-attachments/assets/9be00845-1ce8-431c-9ada-d790861d03a9" />
 
-Your script should include the pauses. Where does your device wait, and for how long? You now know from Part C that this is a parameter you have to choose, not something that happens for free.
+Your script should include the pauses. Where does your device wait, and for how long? You now know from Part C that this is a parameter you have to choose, not something that happens for free. 
+
+Our initial script: 
+1. Starting the interaction
+User: “I can’t sleep, please tell me a story.”
+[Device waits 1 second]
+Device: “Of course. What kind of story would you like to hear?”
+[Device waits up to 4 seconds for a response]
+2. Choosing a story
+User: “Horror.”
+[Device waits 1 second]
+Device: “Alright then, here goes. In a faraway place, there was a haunted house…”
+[Device continues speaking for a few seconds, then listens for interruptions.]
+3. User interrupts
+User: “Wait, a haunted house or castle?”
+[Device immediately pauses the story and waits 1 second to make sure the user has finished speaking.]
+Device: “It’s a haunted house, reader. And within the house, there was a spirit…”
+[Device continues the story.]
+The user can also interrupt with commands such as “pause,” “stop,” “continue,” or “change the story.” The device prioritizes the user's speech over the story whenever it detects an interruption.
+4. Ending the story
+[Story finishes]
+[Device waits 2 seconds]
+Device: “Hope that helped. Sweet dreams!”
+[Device becomes idle/quiet and waits for the next interaction.]
+
 
 ## E. Acting out the dialogue
 
