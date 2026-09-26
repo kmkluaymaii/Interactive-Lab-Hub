@@ -170,16 +170,19 @@ Storyboard and/or use a Verplank diagram to design a speech-enabled device. (Stu
 \*\***Post your storyboard and diagram here.**\*\*
 Our idea for a speech-enabled device is creating a bedside voice assistant that acts like a personal storyteller. The interaction is intentionally hands-free so the user can stay comfortable in bed, and hopefully if done well, can insure a good night's sleep for users of all ages. 
 Verplank Diagram: 
-<img width="873" height="454" alt="Screenshot 2026-09-26 at 10 37 48 AM" src="https://github.com/user-attachments/assets/35113f5f-a722-43e8-8966-0fb33317c53e" />
-<img width="737" height="488" alt="Screenshot 2026-09-24 at 9 05 19 PM" src="https://github.com/user-attachments/assets/9b002401-8106-4c64-8be6-2d521d75ed47" />
+
+<img width="737" height="488" alt="Screenshot 2026-09-24 at 9 05 19 PM" src="https://github.com/user-attachments/assets/23dfa129-887f-47bd-bce6-9907b0871850" />
+
 
 Storyboard: 
+
 <img width="538" height="487" alt="Screenshot 2026-09-24 at 8 58 56 PM" src="https://github.com/user-attachments/assets/fd41de42-fe6e-41a6-9f62-02a423116da4" />
 
 
 Write out what you imagine the dialogue to be. Use cards, post-its, or whatever method helps you develop alternatives or group responses.
-To chart out how the dialogue should function, we first made a block diagram to showcase it: 
 \*\***Please describe and document your process.**\*\*
+To chart out how the dialogue should function, we first made a block diagram to showcase it: 
+
 <img width="868" height="455" alt="Screenshot 2026-09-26 at 10 38 17 AM" src="https://github.com/user-attachments/assets/9be00845-1ce8-431c-9ada-d790861d03a9" />
 
 Your script should include the pauses. Where does your device wait, and for how long? You now know from Part C that this is a parameter you have to choose, not something that happens for free. 
