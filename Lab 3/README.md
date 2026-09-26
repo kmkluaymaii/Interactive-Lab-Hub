@@ -189,25 +189,45 @@ Your script should include the pauses. Where does your device wait, and for how 
 
 Our initial script: 
 1. Starting the interaction
+   
 User: “I can’t sleep, please tell me a story.”
+
 [Device waits 1 second]
+
 Device: “Of course. What kind of story would you like to hear?”
+
 [Device waits up to 4 seconds for a response]
-2. Choosing a story
+
+3. Choosing a story
+   
 User: “Horror.”
+
 [Device waits 1 second]
+
 Device: “Alright then, here goes. In a faraway place, there was a haunted house…”
+
 [Device continues speaking for a few seconds, then listens for interruptions.]
-3. User interrupts
+
+5. User may interrupt at any point of the story
+   
 User: “Wait, a haunted house or castle?”
-[Device immediately pauses the story and waits 1 second to make sure the user has finished speaking.]
+
+[Device pauses (probably has a 1-2 second delay) the story and waits 1 second to make sure the user has finished speaking.]
+
 Device: “It’s a haunted house, reader. And within the house, there was a spirit…”
+
 [Device continues the story.]
+
 The user can also interrupt with commands such as “pause,” “stop,” “continue,” or “change the story.” The device prioritizes the user's speech over the story whenever it detects an interruption.
-4. Ending the story
+
+7. Ending the story
+   
 [Story finishes]
+
 [Device waits 2 seconds]
+
 Device: “Hope that helped. Sweet dreams!”
+
 [Device becomes idle/quiet and waits for the next interaction.]
 
 
