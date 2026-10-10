@@ -286,6 +286,39 @@ As you develop your Feast Automata concept, consider where the sensor and actuat
 **\*\*\*Draw 5 sketches that explore different physical arrangements for your sensing and actuation.\*\*\***
 
 **\*\*\*What questions do these sketches raise? What do you need to physically prototype to answer them?\*\*\***
+**Mechanical Questions**
+- Servo Torque: Can a 9g servo move the robot smoothly with added components?  
+*Prototype:* Test the bow motion using lightweight cardboard, then add weight to check for stalling or jittering.
+- Stability: Will the robot tip forward while bowing?  
+*Prototype:* Test exaggerated bows with different base weights to determine the minimum ballast needed.
+- Attachment Strength: Which method best secures cardboard to the servo horn?  
+*Prototype:* Compare hot glue, a wooden dowel, and a reinforced cardboard sandwich over 50 bow cycles.
+- Structural Stability: Will the neck and pivot remain stable during movement?  
+*Prototype:* Test the chopstick rest and head assemblies for wobbling, bending, and alignment.
+
+**Sensing Questions**
+- Capacitive Sensing: Can the sensor detect chopsticks through cardboard or paper?  
+*Prototype:* Use `cap_test.py` to compare wooden and plastic chopsticks at different material thicknesses.
+- Food Detection: Can the APDS-9960 distinguish a full plate from an empty one?  
+*Prototype:* Use `color_test.py` to record RGB readings across different foods, plates, and lighting conditions.
+- Gesture Detection: Will normal eating trigger false gestures?  
+*Prototype:* Simulate eating for two minutes and adjust the sensor angle and distance to reduce false triggers.
+- Plate Removal: What distance threshold reliably indicates that a plate has been removed?  
+*Prototype:* Use `qwiic_distance.py` to record readings at different plate positions and determine the threshold and required delay.
+
+**Interaction and Timing Questions**
+- Meal Completion: How long should the robot wait before recognizing the end of a meal?  
+*Prototype:* Time normal eating pauses and test a 15 to 30 second delay to prevent premature bows.
+- Bow Motion: Does a smooth bow feel more respectful than a sudden movement?  
+*Prototype:* Compare an instant bow with a one second eased motion and bottom hold.
+- Visibility: Will diners notice the bow while eating?  
+*Prototype:* Observe a diner interacting with the robot and adjust its position or add a chime if needed.
+
+**Housing and Practical Questions**
+- Cable Management: Can power cables exit cleanly without affecting stability?  
+*Prototype:* Test rear cable routing and check for visual clutter or cable tension.
+- Debugging Access: Can the Raspberry Pi be accessed without damaging the housing?  
+*Prototype:* Test a removable back panel using magnets, tabs, or Velcro.
 
 **\*\*\*Pick one design to prototype and explain why.\*\*\***
 
