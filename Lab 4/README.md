@@ -147,17 +147,25 @@ We connected the APDS-9960 sensor to the Raspberry Pi using a Qwiic connector. W
 
 ***Physical Setup***
 
+<img width="1600" height="1200" alt="image" src="https://github.com/user-attachments/assets/96e2c277-5689-4734-8b09-c4395d28e7c0" />
+
+
 ***python proximity_test.py***
+
 <img width="792" height="478" alt="Screenshot (93)" src="https://github.com/user-attachments/assets/57f266f6-08bf-4f54-b084-237e1a8c7af2" />
 
 
+
 ***python gesture_test.py***
+
 <img width="773" height="453" alt="Screenshot (102)" src="https://github.com/user-attachments/assets/b2e4fd9d-dc98-4579-86b9-d2be008c8dbe" />
+
 
 
 ***python color_test.py***
 
 <img width="764" height="764" alt="Screenshot (106)" src="https://github.com/user-attachments/assets/ae0998f6-68d6-4d5c-b4f9-4f0164f3693d" />
+
 
 
 #### Rotary Encoder 
@@ -180,68 +188,46 @@ You can go to the [Adafruit Learn Page](https://learn.adafruit.com/adafruit-i2c-
 
 #### Joystick 
 
+We connected the SparkFun Qwiic Joystick to the Raspberry Pi using a Qwiic connector. We ran `joystick_test.py` to observe the joystick’s horizontal and vertical movement, pivot direction, and built-in button press. We attached screenshots of the terminal output and photos of the physical setup. We also included the `joystick_test.py` file and the SparkFun GitHub reference for the sensor.
 
-A [joystick](https://www.sparkfun.com/products/15168) can be used to sense and report the input of the stick for it pivoting angle or direction. It also comes with a button input!
+***Physical setup***
 
-<p float="left">
-<img src="https://cdn.sparkfun.com//assets/parts/1/3/5/5/8/15168-SparkFun_Qwiic_Joystick-01.jpg" height="200" />
-</p>
+<img width="1600" height="1200" alt="image" src="https://github.com/user-attachments/assets/b65d53f8-e947-4630-9c98-71eae4cad168" />
 
-Connect it to your pi with Qwiic connector and try running the example script to see what it can do!
 
-```
-(circuitpython) pi@ixe00:~/Interactive-Lab-Hub/Lab 4 $ python joystick_test.py
-```
+***joystick_test.py***
 
-You can go to the [SparkFun GitHub Page](https://github.com/sparkfun/Qwiic_Joystick_Py) to learn more about the sensor!
+<img width="798" height="642" alt="Screenshot (97)" src="https://github.com/user-attachments/assets/b0af883f-18c3-443d-b1ba-1ee2107b4090" />
+
 
 #### Distance Sensor
 
+We connected the SparkFun VCNL4040 proximity sensor to the Raspberry Pi using a Qwiic connector. We ran `qwiic_distance.py` to measure the distance between the sensor and nearby objects. The sensor can detect objects from close range up to approximately 20 cm. We attached screenshots of the terminal output and photos of the physical setup. We also included the `qwiic_distance.py` file and the SparkFun GitHub reference.
 
-Earlier we have asked you to play with the proximity sensor, which is able to sense objects within a short distance. Here, we offer [Sparkfun Proximity Sensor Breakout](https://www.sparkfun.com/products/15177), With the ability to detect objects up to 20cm away.
 
-<p float="left">
-<img src="https://cdn.sparkfun.com//assets/parts/1/3/5/9/2/15177-SparkFun_Proximity_Sensor_Breakout_-_20cm__VCNL4040__Qwiic_-01.jpg" height="200" />
+***Physical Setup***
 
-</p>
+<img width="1600" height="1200" alt="image" src="https://github.com/user-attachments/assets/dd7f5f3c-33d5-4f32-bb7b-12b9ed1e72b1" />
 
-Connect it to your pi with Qwiic connector and try running the example script to see how it works!
 
-```
-(circuitpython) pi@ixe00:~/Interactive-Lab-Hub/Lab 4 $ python qwiic_distance.py
-```
+***qwiic_distance.py***
 
-You can go to the [SparkFun GitHub Page](https://github.com/sparkfun/Qwiic_Proximity_Py) to learn more about the sensor and see other examples
+<img width="818" height="915" alt="Screenshot (101)" src="https://github.com/user-attachments/assets/205c035c-229a-4f40-adc9-b0bc4dcf5b9f" />
 
----
+
 
 ### Part C
 ### Servo Actuation
+We connected the SparkFun Servo pHAT to the Raspberry Pi and attached a 9g micro servo to channel 0. The Servo pHAT was powered separately through its USB-C connection so the servo received enough current without using the Raspberry Pi’s 5 V rail. We ran pi_servo_hat_test.py to sweep the servo between different angles and observe its movement. We attached screenshots of the terminal output and photos of the physical setup,
 
-Now that you have explored several forms of sensing, add physical output by learning to control a servo motor. Complete the Servo pHAT setup and basic servo test before beginning your interaction design.
+**Physical Setup**
+<img width="1600" height="1190" alt="image" src="https://github.com/user-attachments/assets/87652435-f3ed-4c9b-8110-ed22bb9e3993" />
 
-### Servo Control with SparkFun Servo pHAT
-For this lab, you will use the **SparkFun Servo pHAT** to control a micro servo (such as the Miuzei MS18 or similar 9g servo). The Servo pHAT stacks directly on top of the Adafruit Mini PiTFT (135×240) display without pin conflicts:
-- The Mini PiTFT uses SPI (GPIO22, 23, 24, 25) for display and buttons ([SPI pinout](https://pinout.xyz/pinout/spi)).
-- The Servo pHAT uses I²C (GPIO2 & 3) for the PCA9685 servo driver ([I2C pinout](https://pinout.xyz/pinout/i2c)).
-- Since SPI and I²C are separate buses, you can use both boards together.
-**⚡ Power:**
-- Plug a USB-C cable into the Servo pHAT to provide enough current for the servos. The Pi itself should still be powered by its own USB-C supply. Do NOT power servos from the Pi’s 5V rail.
 
-<p align="center">
-    <img src="Servo_pHAT.gif" alt="Servo pHAT Demo" width="400"/>
-</p>
+**pi_servo_hat_test.py**
+<img width="804" height="404" alt="Screenshot (108)" src="https://github.com/user-attachments/assets/59b6282f-1396-443d-91e0-d00c4e21b056" />
 
-**Basic Python Example:**
-We provide a simple example script: `Lab 4/pi_servo_hat_test.py` (requires the `pi_servo_hat` Python package).
-Run the example:
-```
-python pi_servo_hat_test.py
-```
-For more details and advanced usage, see the [official SparkFun Servo pHAT documentation](https://learn.sparkfun.com/tutorials/pi-servo-phat-v2-hookup-guide/all#resources-and-going-further).
-A servo motor is a rotary actuator that allows for precise control of angular position. The position is set by the width of an electrical pulse (PWM). You can read [this Adafruit guide](https://learn.adafruit.com/adafruit-arduino-lesson-14-servo-motors/servo-motors) to learn more about how servos work.
 
----
 
 ### Part D
 ### Physical Interaction Design: Feast Automata
