@@ -138,6 +138,10 @@ Plug in the capacitive sensor board with the QWIIC connector. Connect your Twizz
 
 These Twizzlers are connected to pads 6 and 10. When you run the code and touch a Twizzler, the terminal will print out the following
 
+
+<img width="1600" height="1200" alt="WhatsApp Image 2026-10-13 at 2 36 34 AM" src="https://github.com/user-attachments/assets/2ba29898-ae42-4171-bf4a-3f16a40a9c85" />
+
+
 ```
 (circuitpython) pi@ixe00:~/Interactive-Lab-Hub/Lab 4 $ python cap_test.py 
 Twizzler 10 touched!
