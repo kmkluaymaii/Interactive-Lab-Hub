@@ -126,56 +126,39 @@ Option 3: (preferred) use the Github.com interface to update the changes.
 ### Part A
 ### Capacitive Sensing, a.k.a. Human-Twizzler Interaction 
 
-We want to introduce you to the [capacitive sensor](https://learn.adafruit.com/adafruit-mpr121-gator) in your kit. It's one of the most flexible input devices we are able to provide. At boot, it measures the capacitance on each of the 12 contacts. Whenever that capacitance changes, it considers it a user touch. You can attach any conductive material. In your kit, you have copper tape that will work well, but don't limit yourself! In the example below, we use Twizzlers--you should pick your own objects.
+We connected the MPR121 capacitive sensor to the Raspberry Pi using a Qwiic connection. We attached two conductive objects to touch pads 6 and 10 using alligator clips. When we touched either object, the Python program detected the change in capacitance and printed Pad 6 touched! or Pad 10 touched! in the terminal. This showed how ordinary objects can be used as touch-sensitive controls. We have attached image of terminal and physical setup below:
 
+***Physical Setup***
 
-<p float="left">
-<img src="https://cdn-learn.adafruit.com/guides/cropped_images/000/003/226/medium640/MPR121_top_angle.jpg?1609282424" height="150" />
- 
-</p>
-
-Plug in the capacitive sensor board with the QWIIC connector. Connect your Twizzlers with either the copper tape or the alligator clips (the clips work better). Install the latest requirements from your working virtual environment:
-
-These Twizzlers are connected to pads 6 and 10. When you run the code and touch a Twizzler, the terminal will print out the following
-
-
-<img width="1600" height="1200" alt="WhatsApp Image 2026-10-13 at 2 36 34 AM" src="https://github.com/user-attachments/assets/2ba29898-ae42-4171-bf4a-3f16a40a9c85" />
-
-
-```
-(circuitpython) pi@ixe00:~/Interactive-Lab-Hub/Lab 4 $ python cap_test.py 
-Twizzler 10 touched!
-Twizzler 6 touched!
-
-<img width="3732" height="2414" alt="20261013_032352" src="https://github.com/user-attachments/assets/86fc06ad-07d2-428e-a800-4ea8788183a2" />
-
-
-
+<img width="1600" height="1034" alt="image" src="https://github.com/user-attachments/assets/0df3c513-ce2c-45ab-9367-7f2817f399f9" />
 
 ---
-```
+***cap_test.py***
+
+<img width="752" height="276" alt="Screenshot (88)" src="https://github.com/user-attachments/assets/fbc7d42a-c443-4844-8990-c2a6020a8a8b" />
+
+
 ### Part B
 ### More sensors
 
 #### Light/Proximity/Gesture sensor (APDS-9960)
 
-We here want you to get to know this awesome sensor [Adafruit APDS-9960](https://www.adafruit.com/product/3595). It is capable of sensing proximity, light (also RGB), and gesture! 
- 
-<img src="https://cdn-shop.adafruit.com/970x728/3595-06.jpg" width=200>
- 
+We connected the APDS-9960 sensor to the Raspberry Pi using a Qwiic connector. We ran proximity_test.py to measure how close an object was, gesture_test.py to detect hand movements such as up, down, left, and right, and color_test.py to read RGB and ambient light values. We attached screenshots of the terminal outputs and photos of the physical sensor setup.
 
-Connect it to your pi with Qwiic connector and try running the three example scripts individually to see what the sensor is capable of doing!
+***Physical Setup***
 
-```
-(circuitpython) pi@ixe00:~/Interactive-Lab-Hub/Lab 4 $ python proximity_test.py
-...
-(circuitpython) pi@ixe00:~/Interactive-Lab-Hub/Lab 4 $ python gesture_test.py
-...
-(circuitpython) pi@ixe00:~/Interactive-Lab-Hub/Lab 4 $ python color_test.py
-...
-```
+***python proximity_test.py***
+<img width="792" height="478" alt="Screenshot (93)" src="https://github.com/user-attachments/assets/57f266f6-08bf-4f54-b084-237e1a8c7af2" />
 
-You can go the the [Adafruit GitHub Page](https://github.com/adafruit/Adafruit_CircuitPython_APDS9960) to see more examples for this sensor!
+
+***python gesture_test.py***
+<img width="773" height="453" alt="Screenshot (102)" src="https://github.com/user-attachments/assets/b2e4fd9d-dc98-4579-86b9-d2be008c8dbe" />
+
+
+***python color_test.py***
+
+<img width="764" height="764" alt="Screenshot (106)" src="https://github.com/user-attachments/assets/ae0998f6-68d6-4d5c-b4f9-4f0164f3693d" />
+
 
 #### Rotary Encoder 
 
