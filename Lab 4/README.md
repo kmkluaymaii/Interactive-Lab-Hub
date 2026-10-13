@@ -142,6 +142,14 @@ These Twizzlers are connected to pads 6 and 10. When you run the code and touch 
 (circuitpython) pi@ixe00:~/Interactive-Lab-Hub/Lab 4 $ python cap_test.py 
 Twizzler 10 touched!
 Twizzler 6 touched!
+
+
+<img width="752" height="276" alt="Screenshot (88)" src="https://github.com/user-attachments/assets/1e2a9aaf-b8f7-4252-a88c-cfc48511aa4c" />
+
+
+<img width="1600" height="1034" alt="image" src="https://github.com/user-attachments/assets/c4f3e9ab-047f-4256-876d-9b8611604005" />
+
+
 ```
 
 ---
