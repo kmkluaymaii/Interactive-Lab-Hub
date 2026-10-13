@@ -221,10 +221,12 @@ We connected the SparkFun VCNL4040 proximity sensor to the Raspberry Pi using a 
 We connected the SparkFun Servo pHAT to the Raspberry Pi and attached a 9g micro servo to channel 0. The Servo pHAT was powered separately through its USB-C connection so the servo received enough current without using the Raspberry Pi’s 5 V rail. We ran pi_servo_hat_test.py to sweep the servo between different angles and observe its movement. We attached screenshots of the terminal output and photos of the physical setup,
 
 **Physical Setup**
+
 <img width="1600" height="1190" alt="image" src="https://github.com/user-attachments/assets/87652435-f3ed-4c9b-8110-ed22bb9e3993" />
 
 
 **pi_servo_hat_test.py**
+
 <img width="804" height="404" alt="Screenshot (108)" src="https://github.com/user-attachments/assets/59b6282f-1396-443d-91e0-d00c4e21b056" />
 
 
