@@ -143,6 +143,11 @@ These Twizzlers are connected to pads 6 and 10. When you run the code and touch 
 Twizzler 10 touched!
 Twizzler 6 touched!
 
+<img width="3732" height="2414" alt="20261013_032352" src="https://github.com/user-attachments/assets/86fc06ad-07d2-428e-a800-4ea8788183a2" />
+
+
+
+
 ---
 ```
 ### Part B
