@@ -17,9 +17,9 @@
 ---
 
 ## Lab Overview
-Team: <canvas group name>  
-Members: Rawisara Chairat (rc2239, kmkluaymaii), Lamiah Khan (ltk38, khanlamiah019), Afroza Aktar, Xiaoxi Xu 
-Project name: Bown Appétit
+**Team:** A little confused on this but it will be submitted under Rawisara Chairat's canvas   <br>
+**Members:** Rawisara Chairat (rc2239, kmkluaymaii), Lamiah Khan (ltk38, khanlamiah019), Afroza Aktar (aa2995, Afrozaktar), Xiaoxi Xu (xx373, xuxx21) <br>
+**Project name:** Bown Appétit
 
 
 For lab this week, we focus on both sensing and actuation, bringing new modes of input and output into your devices, while also prototyping the physical structure and overall look of the device. You will consider how the physical form supports sensing and actuation, and how these elements come together to shape the interaction and aesthetics of the device.
@@ -262,9 +262,36 @@ Your kit includes these [SparkFun Qwiic OLED screens](https://www.sparkfun.com/p
 
 As you develop your Feast Automata concept, consider where the sensor and actuator need to be placed, what parts move, how electronics are housed, and how the overall form and aesthetics support the interaction.
 
-**\*\*\*Draw 5 sketches that explore different physical arrangements for your sensing and actuation.\*\*\***
+### **Exploring Five Different Design Concepts**
 
-**\*\*\*What questions do these sketches raise? What do you need to physically prototype to answer them?\*\*\***
+- Sketch 1
+
+<img width="412" height="615" alt="18974C96-78FA-496D-8CB0-FE07626F782A" src="https://github.com/user-attachments/assets/a3fb0c9b-3bf1-4473-b9de-f9de860da04e" />
+<br></br>
+
+- Sketch 2
+
+<img width="429" height="614" alt="818C96AB-5F5E-4E73-BC39-96AAA2B0E179" src="https://github.com/user-attachments/assets/9a67ee9c-5454-436a-bf88-9649103c48b3" />
+<br></br>
+
+- Sketch 3
+
+<img width="398" height="621" alt="352F2EB2-EDFC-4F6F-9856-E201FAE08FDF" src="https://github.com/user-attachments/assets/87583ced-3a1c-4c1c-8c31-957d4d1b6e31" />
+<br></br>
+
+- Sketch 4
+
+<img width="632" height="504" alt="B76DDF3D-FFC4-4CAD-BB1A-A5BB2F7CBFE8" src="https://github.com/user-attachments/assets/c5133385-6327-4055-bd11-db160558341f" />
+<br></br>
+
+
+- Sketch 5
+
+<img width="597" height="505" alt="192E23E5-358B-46D2-A522-8156B09A2311" src="https://github.com/user-attachments/assets/80f6f3cc-9e35-472a-bcef-396c7cdfe520" />
+<br></br>
+
+### **Design Questions & Prototyping**
+
 **Mechanical Questions**
 - Servo Torque: Can a 9g servo move the robot smoothly with added components?  
 *Prototype:* Test the bow motion using lightweight cardboard, then add weight to check for stalling or jittering.
@@ -299,11 +326,26 @@ As you develop your Feast Automata concept, consider where the sensor and actuat
 - Debugging Access: Can the Raspberry Pi be accessed without damaging the housing?  
 *Prototype:* Test a removable back panel using magnets, tabs, or Velcro.
 
-**\*\*\*Pick one design to prototype and explain why.\*\*\***
+### Concept Development
+#### **Design Selection**
 
-Build a cardboard or other low-fidelity physical prototype of your design.
+We chose the Daruma Chef concept because we wanted to create a friendly, character-like robot that communicates through movement. We adapted the design into a chef character with a simple, rounded body and a chef hat to give it a recognizable personality. The neck-pivot mechanism allows the head to tilt forward in a bowing gesture, while sensors enable the robot to respond to user interactions. We chose this concept because it combines expressive movement with a compact design that can house the necessary electronics.
 
-**\*\*\*Document your rough prototype with photos and/or video.\*\*\***
+#### **Prototype Documentation**
+
+We built a low-fidelity paper and cardboard prototype to explore the chef’s shape, proportions, and neck-pivot movement. The prototype illustrates how the head could tilt forward to create a bowing gesture while the base remains stationary. We also explored potential placements for the servo, sensors, Raspberry Pi, and speaker within the body. The final design may need to be larger to accommodate the Raspberry Pi and speaker comfortably, while leaving enough room for the wiring and moving mechanism. This early model helped us visualize the physical arrangement and identify adjustments to make before building the functional prototype.
+
+<img width="4158" height="2772" alt="C5CECF6B-1498-46E7-B29D-BF5A9C04A17D" src="https://github.com/user-attachments/assets/3b4f7bcd-3c4c-4228-b501-0cfd2b0ee18c" />
+
+
+
+https://github.com/user-attachments/assets/3d68944a-e549-455f-bda1-a1a16d7366d6
+
+
+
+
+
+
 
 ---
 
