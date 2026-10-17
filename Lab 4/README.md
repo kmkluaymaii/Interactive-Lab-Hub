@@ -544,6 +544,23 @@ Document all the prototypes and iterations you have designed and worked on! Agai
 * "Works like": shows what the device can do
 * "Acts like": shows how a person would interact with the device
 
+
+### Looks Like
+
+- A small figure approximately 15 cm tall, with a three-part body: a cylindrical chef’s hat, a cube-shaped head with hand-drawn glasses, and a larger cube-shaped body with a drawn mouth that doubles as a speaker grille.
+- A 9 g micro servo at the waist acts as a pivot, allowing the upper body to bow forward. The Raspberry Pi and speaker are housed inside the body, while the APDS9960 sensor sits in a small front pocket positioned at chopstick height.
+
+### Works Like
+
+- The APDS9960 continuously reads proximity and ambient light values to detect whether chopsticks are resting in their holder. The system classifies each reading as `present`, `absent`, or `uncertain`, using a 0.6-second debounce period to prevent false triggers from passing hands or clothing.
+- Once the chopsticks are picked up and their absence is confirmed, the Raspberry Pi plays `ittadakimasu.mp3` in a background thread while smoothly moving the servo from 45° (upright) to 90° (bowed) in 1° increments, syncing the movement with the greeting.
+- After the audio finishes and a brief pause, the servo returns to its upright position. The system then waits for the chopsticks to be returned before resetting, ensuring one bow per meal rather than repeated movements.
+
+### Acts Like
+
+- The interaction is entirely touch-free and rooted in ritual. The user simply picks up their chopsticks to begin eating, and Bow-n Appétit responds like a tiny dining companion, acknowledging the Japanese custom of saying *itadakimasu* before a meal.
+- It is designed to feel polite and patient. The device waits until it detects the chopsticks in their holder, then responds only when they are removed. This makes the interaction feel intentional rather than reactive to every movement around the table.
+- Returning the chopsticks quietly resets the device without another sound or gesture. Bow-n Appétit is present when the moment calls for it and unobtrusive the rest of the time.
 ---
 
 ## Deliverables \& Submission for Lab 4
