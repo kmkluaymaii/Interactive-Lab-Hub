@@ -380,7 +380,7 @@ https://github.com/user-attachments/assets/6364a119-5136-4fa2-a8af-824b598cbfae
 
 **Our Reflection**
 
-Building Bown Appétit taught us that sensing, movement, and physical form cannot be designed separately. Our first paper model focused on the chef's shape and proportions, but it did not fully account for the hardware. Once the circuit was wired, we had to resize the body to a more practical scale that could hold the Raspberry Pi, the speaker, and the wiring while leaving room for the neck pivot to move. Sensing also shaped the form in return: because the sensor needed to detect chopsticks resting on the table, we added a small pocket at the front of the body to hold the APDS-9960 at chopstick height.
+Building Bown Appétit taught us that sensing, movement, and physical form cannot be designed separately. Our first paper model focused on the chef’s shape and proportions, but it did not fully account for the hardware. Once the circuit was wired, we had to resize the body to a more practical scale that could hold the Raspberry Pi, the speaker, and the wiring while leaving room for the neck pivot to move. Sensing also shaped the form in return. Because the sensor needed to detect chopsticks resting on the table, it had to sit low, at chopstick height. We first planned a pocket at the front of the body, but in the final build we moved the APDS-9960 to the side. This kept the front of the character clean and complete, and it matched where people naturally rest their chopsticks, beside the plate rather than in front of it.
 
 Choosing and tuning the sensor was harder than we expected. Gesture detection did not fit our interaction, because picking up chopsticks is not a clear, consistent hand gesture like a swipe up or down. Color readings shifted with different light sources and gave us only RGB values, which made confident decisions difficult. We ended up combining proximity with ambient light and sorting each reading into present, absent, or uncertain. A hand or a sleeve passing by produces an uncertain reading and resets the timer, and a 0.6-second debounce keeps those moments from triggering a false bow. We also tuned the bow over many iterations so the servo moves smoothly from 45° to 90° in 1° steps instead of snapping into place.
 
@@ -572,17 +572,23 @@ Document all the prototypes and iterations you have designed and worked on! Agai
 * "Acts like": shows how a person would interact with the device
 
 ### Looks Like
+<img width="1200" height="1600" alt="image000001" src="https://github.com/user-attachments/assets/3500bf9e-6139-4284-a692-ac432d1ed114" />
 
-- A small figure approximately 15 cm tall, with a three-part body: a cylindrical chef’s hat, a cube-shaped head with hand-drawn glasses, and a larger cube-shaped body with a drawn mouth that doubles as a speaker grille.
-- A 9 g micro servo at the waist acts as a pivot, allowing the upper body to bow forward. The Raspberry Pi and speaker are housed inside the body, while the APDS9960 sensor sits in a small front pocket positioned at chopstick height.
+- A small figure approximately 15 cm tall, built from cardboard and hand-drawn with markers. It has three parts: a white cylindrical chef's hat, a cube-shaped head with hand-drawn round glasses and a smiling mouth, and a larger body drawn as a purple shirt with a collar, buttons, and a pocket.
+- A 9 g micro servo sits at the neck with a hinge, so the head and hat tilt forward together in a bowing gesture while the body stays still.
+- The Raspberry Pi, Servo pHAT, and speaker are housed inside the body. The APDS-9960 sensor is mounted on the side of the body at chopstick height, facing the chopsticks that rest beside the figure, which keeps the front of the character clean.
 
 ### Works Like
+
+<img width="1924" height="984" alt="image" src="https://github.com/user-attachments/assets/0d37b36c-7e85-471e-bd0e-e141813a1051" />
+<img width="1200" height="1600" alt="image000000" src="https://github.com/user-attachments/assets/04421fe5-fbfc-4741-9126-82f2185aeaf5" />
 
 - The APDS9960 continuously reads proximity and ambient light values to detect whether chopsticks are resting in their holder. The system classifies each reading as `present`, `absent`, or `uncertain`, using a 0.6-second debounce period to prevent false triggers from passing hands or clothing.
 - Once the chopsticks are picked up and their absence is confirmed, the Raspberry Pi plays `ittadakimasu.mp3` in a background thread while smoothly moving the servo from 45° (upright) to 90° (bowed) in 1° increments, syncing the movement with the greeting.
 - After the audio finishes and a brief pause, the servo returns to its upright position. The system then waits for the chopsticks to be returned before resetting, ensuring one bow per meal rather than repeated movements.
 
 ### Acts Like
+https://github.com/user-attachments/assets/0b82d609-d26f-45f0-b622-1e38813c8d34
 
 - The interaction is entirely touch-free and rooted in ritual. The user simply picks up their chopsticks to begin eating, and Bow-n Appétit responds like a tiny dining companion, acknowledging the Japanese custom of saying *itadakimasu* before a meal.
 - It is designed to feel polite and patient. The device waits until it detects the chopsticks in their holder, then responds only when they are removed. This makes the interaction feel intentional rather than reactive to every movement around the table.
