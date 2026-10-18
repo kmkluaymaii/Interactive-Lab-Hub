@@ -359,7 +359,17 @@ Following exploration and reflection from Part 1, complete the "looks like," "wo
 
 #### Build & Integrate: Sensing + Actuation
 
-For Part 2, build the Feast Automata interaction you developed in Part D by connecting sensing/input to physical actuation.
+### Our System
+- Code for your sensing + actuation prototype
+- Photos and/or video of the working prototype in action
+**System Diagram**
+  <img width="1354" height="476" alt="image" src="https://github.com/user-attachments/assets/e0342d69-0f62-47b3-b046-9525b84bd952" />
+**Interaction Flow**
+<img width="1374" height="538" alt="image" src="https://github.com/user-attachments/assets/750c8809-49f6-49a3-a0ac-437f6603d2fb" />
+**Our Reflection**
+- Building Bown Appétit taught us that sensing, movement, and physical form cannot be designed separately. Our first paper model focused on the chef's shape and proportions, but it did not fully account for the hardware. Once the circuit was wired, we had to resize the body to a more practical scale that could hold the Raspberry Pi, the speaker, and the wiring while leaving room for the neck pivot to move. The form also decided where sensing could happen: the APDS-9960 had to sit in a front pocket at chopstick height, so the body itself became the mount that makes the sensor reliable.
+- Choosing and tuning the sensor was harder than we expected. Gesture detection was not dependable enough for this interaction, and color readings shifted with different light sources while giving us only RGB values, which made confident decisions difficult. We ended up combining proximity with ambient light and sorting each reading into present, absent, or uncertain. A hand or a sleeve passing by produces an uncertain reading and resets the timer, and a 0.6-second debounce keeps those moments from triggering a false bow. We also tuned the bow over many iterations so the servo moves smoothly from 45° to 90° in 1° steps instead of snapping into place.
+- What surprised us most was how much the timing between sound and motion shaped the character. Instead of firing them at the same instant, we let the greeting start first and begin the bow half a second later, then hold the bow briefly after the voice ends before returning upright. This sequence feels closer to how a person speaks and then bows, and it makes the robot read as polite rather than mechanical. We built a separate test script, triggered by the Enter key, to tune this voice-and-bow pairing without the sensor. The most fun part was people's reactions: many found the idea cute, and compared with a purely functional robot, Bown Appétit drew out more emotion, helped a lot by how crisp the itadakimasu voice sounds.
 
 **Your prototype should:**
 - Use at least one sensing or input device.
@@ -543,7 +553,6 @@ Document all the prototypes and iterations you have designed and worked on! Agai
 * "Looks like": shows how the device should look, feel, sit, weigh, etc.
 * "Works like": shows what the device can do
 * "Acts like": shows how a person would interact with the device
-
 
 ### Looks Like
 
