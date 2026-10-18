@@ -22,7 +22,12 @@
 **Project name:** Bown Appétit
 
 
+<details>
+<summary><strong>Lab overview instructions</strong> (click to expand)</summary>
+
 For lab this week, we focus on both sensing and actuation, bringing new modes of input and output into your devices, while also prototyping the physical structure and overall look of the device. You will consider how the physical form supports sensing and actuation, and how these elements come together to shape the interaction and aesthetics of the device.
+
+</details>
 
 ---
 
@@ -45,6 +50,9 @@ F) [Final Documentation](#part-f)
 ## Part 1 Lab Preparation
 
 ---
+
+<details>
+<summary><strong>Lab preparation, setup & references</strong> (click to expand)</summary>
 
 ### Get the latest content:
 As always, pull updates from the class Interactive-Lab-Hub to both your Pi and your own GitHub repo. As we discussed in the class, there are 3 ways you can do so:
@@ -120,6 +128,8 @@ Option 3: (preferred) use the Github.com interface to update the changes.
 
 * [Gear Template Generator](https://woodgears.ca/gear_cutting/template.html) can help you prototype simple gear mechanisms for translating servo motion into physical movement.
 
+</details>
+
 
 ---
 
@@ -168,6 +178,9 @@ We connected the APDS-9960 sensor to the Raspberry Pi using a Qwiic connector. W
 
 
 
+<details>
+<summary><strong>Rotary Encoder lab instructions</strong> (click to expand)</summary>
+
 #### Rotary Encoder 
 
 A rotary encoder is an electro-mechanical device that converts the angular position to analog or digital output signals. The [Adafruit rotary encoder](https://www.adafruit.com/product/4991#technical-details) we ordered for you came pre-soldered, so you do NOT need to solder anything.
@@ -185,6 +198,8 @@ Connect it to your pi with Qwiic connector and try running the example script, i
 ```
 
 You can go to the [Adafruit Learn Page](https://learn.adafruit.com/adafruit-i2c-qt-rotary-encoder/python-circuitpython) to learn more about the sensor! The sensor actually comes with an LED (neo pixel): Can you try lighting it up? 
+
+</details>
 
 #### Joystick 
 
@@ -234,6 +249,9 @@ We connected the SparkFun Servo pHAT to the Raspberry Pi and attached a 9g micro
 ### Part D
 ### Physical Interaction Design: Feast Automata
 
+<details>
+<summary><strong>Part D instructions</strong> (click to expand)</summary>
+
 **Feast Automata:** build a device that **transforms ordinary dining rituals into playful physical interactions.** Begin with a familiar experience around eating, drinking, cooking, serving, or sharing food, and explore how sensing and actuation might augment, exaggerate, automate, or reinterpret your dining experience.
 
 In this part, use the sensing techniques from Parts A–B and the servo actuation from Part C to develop a physical interaction.
@@ -261,6 +279,8 @@ Your kit includes these [SparkFun Qwiic OLED screens](https://www.sparkfun.com/p
 
 
 As you develop your Feast Automata concept, consider where the sensor and actuator need to be placed, what parts move, how electronics are housed, and how the overall form and aesthetics support the interaction.
+
+</details>
 
 ### **Exploring Five Different Design Concepts**
 
@@ -351,7 +371,12 @@ https://github.com/user-attachments/assets/3d68944a-e549-455f-bda1-a1a16d7366d6
 
 ## Part 2
 
+<details>
+<summary><strong>Part 2 instructions</strong> (click to expand)</summary>
+
 Following exploration and reflection from Part 1, complete the "looks like," "works like" and "acts like" prototypes for your design, reiterated below.
+
+</details>
 
 ---
 
@@ -359,7 +384,7 @@ Following exploration and reflection from Part 1, complete the "looks like," "wo
 
 #### Build & Integrate: Sensing + Actuation
 
-### Our System
+#### Our System
 
 **Code**
 
@@ -387,6 +412,9 @@ Choosing and tuning the sensor was harder than we expected. Gesture detection di
 What surprised us most was how much the timing between sound and motion shaped the character. Instead of firing them at the same instant, we let the greeting start first and begin the bow half a second later, then hold the bow briefly after the voice ends before returning upright. This sequence feels closer to how a person speaks and then bows, and it makes the robot read as polite rather than mechanical. 
 
 
+
+<details>
+<summary><strong>Part E instructions, Windmill Coaster example & optional extensions</strong> (click to expand)</summary>
 
 **Your prototype should:**
 - Use at least one sensing or input device.
@@ -555,6 +583,8 @@ python gpio_expander.py
 
 This is a playful way to visualize how the expander works, but the same technique applies if you wanted to prototype buttons, switches, or other interaction elements. It’s a lightweight, flexible addition to your prototyping toolkit.
 
+</details>
+
 ---
 
 
@@ -566,10 +596,15 @@ This is a playful way to visualize how the expander works, but the same techniqu
 
 ### Final Documentation
 
+<details>
+<summary><strong>Part F instructions</strong> (click to expand)</summary>
+
 Document all the prototypes and iterations you have designed and worked on! Again, deliverables for this lab are writings, sketches, photos, and videos that show what your prototype:
 * "Looks like": shows how the device should look, feel, sit, weigh, etc.
 * "Works like": shows what the device can do
 * "Acts like": shows how a person would interact with the device
+
+</details>
 
 ### Looks Like
 <img width="1200" height="1600" alt="image000001" src="https://github.com/user-attachments/assets/3500bf9e-6139-4284-a692-ac432d1ed114" />
@@ -584,16 +619,20 @@ Document all the prototypes and iterations you have designed and worked on! Agai
 <img width="1200" height="1600" alt="image000000" src="https://github.com/user-attachments/assets/04421fe5-fbfc-4741-9126-82f2185aeaf5" />
 
 - The APDS9960 continuously reads proximity and ambient light values to detect whether chopsticks are resting in their holder. The system classifies each reading as `present`, `absent`, or `uncertain`, using a 0.6-second debounce period to prevent false triggers from passing hands or clothing.
-- Once the chopsticks are picked up and their absence is confirmed, the Raspberry Pi plays `ittadakimasu.mp3` in a background thread while smoothly moving the servo from 45° (upright) to 90° (bowed) in 1° increments, syncing the movement with the greeting.
+- Once the chopsticks are picked up and their absence is confirmed, the Raspberry Pi plays `ittadakimasu.mp3` in a background thread. Half a second after the greeting begins, the servo smoothly moves from 45° (upright) to 90° (bowed) in 1° increments.
 - After the audio finishes and a brief pause, the servo returns to its upright position. The system then waits for the chopsticks to be returned before resetting, ensuring one bow per meal rather than repeated movements.
 
 ### Acts Like
 https://github.com/user-attachments/assets/0b82d609-d26f-45f0-b622-1e38813c8d34
 
-- The interaction is entirely touch-free and rooted in ritual. The user simply picks up their chopsticks to begin eating, and Bow-n Appétit responds like a tiny dining companion, acknowledging the Japanese custom of saying *itadakimasu* before a meal.
+- The interaction is entirely touch-free and rooted in ritual. The user simply picks up their chopsticks to begin eating, and Bown Appétit responds like a tiny dining companion, acknowledging the Japanese custom of saying *itadakimasu* before a meal.
 - It is designed to feel polite and patient. The device waits until it detects the chopsticks in their holder, then responds only when they are removed. This makes the interaction feel intentional rather than reactive to every movement around the table.
-- Returning the chopsticks quietly resets the device without another sound or gesture. Bow-n Appétit is present when the moment calls for it and unobtrusive the rest of the time.
+- Returning the chopsticks quietly resets the device without another sound or gesture. Bown Appétit is present when the moment calls for it and unobtrusive the rest of the time.
+
 ---
+
+<details>
+<summary><strong>Deliverables & Submission instructions</strong> (click to expand)</summary>
 
 ## Deliverables \& Submission for Lab 4
 
@@ -606,3 +645,6 @@ For submission, the readme.md page for this lab should be edited to include the 
 * Upload any materials that explain what you did, into your lab 4 repository, and link them in your lab 4 readme.md.
 * Link your Lab 4 readme.md in your main Interactive-Lab-Hub readme.md. 
 * Labs are due on Mondays, make sure to submit your Lab 4 readme.md to Canvas.
+
+</details>
+
