@@ -310,39 +310,9 @@ We ran Qwen locally on the Raspberry Pi using Ollama with reasoning disabled. Th
 </details>
 
 
-## Part E. 
-### Connect: from YOLO readings to Qwen reasoning
+### Part E: YOLO-to-Qwen Pipeline
 
-An observant system is a pipeline: a **detector** turns pixels into boxes, an **interpreter** turns boxes into readings in words ("one person, left, close"), the readings pile up in a **log**, and a **reasoner** answers a question about the log. The language model never sees pixels, only the words you chose in the interpreter. That makes the interpreter the most important design decision in the system.
-
-`yolo_to_qwen.py` is the pipeline in one file, one function per stage. Read it before you run it:
-
-* `interpret(r)` is the interpreter. It takes one YOLO result and returns one reading. A person is *left*, *center* or *right* by which third of the frame the middle of their box is in, and *close* if the box is taller than 60% of the frame, *far* otherwise. The reading is a string like `1 person(s) at center/close`, or `nobody`. Fifteen lines, and they decide everything the model can know.
-* `watch(seconds)` is the detector and the log. Twice a second it reads a frame, runs YOLO on it and calls `interpret()`. A time-stamped reading goes into the log **only when it differs from the previous one**, so a minute of sitting still is one line, not 120.
-* `ask(log, question)` is the reasoner. It pastes the log and your question into one prompt, tells Qwen to answer in at most three sentences using only what is in the log, and sends it to Ollama with thinking off.
-
-Run it through VNC and a window opens with YOLO's boxes, the current reading and the seconds left. Press q to stop watching early. Over plain ssh add `--headless` and you get the same thing minus the window.
-
-```
-(.venv) pi@raspberrypi:~/Interactive-Lab-Hub/Lab 5 $ python yolo_to_qwen.py
-```
-
-It watches for a minute, saves the log to `watch_log.txt` and asks Qwen the default question. The terminal looks something like this:
-
-```
-14:02:11 nobody
-14:02:19 1 person(s) at right/far
-14:02:24 1 person(s) at center/close
-14:02:51 nobody
-
-4 lines saved to watch_log.txt
-asking Qwen...
-
-Qwen (18.4 s):
-One person came in from the right, moved close to the camera, and left after about half a minute. ...
-```
-
----
+We connected YOLO to Qwen to create an observant-system pipeline. YOLO analyzed the webcam frames and detected whether a person was present. The interpreter converted the detections into simple readings such as “1 person(s) at right/far” or “1 person(s) at center/close.” These readings were saved with timestamps in `watch_log.txt`, and a new line was added only when the reading changed. Qwen then read the text log and summarized what happened. It did not receive the original camera images; it only received the words produced by the interpreter. Our experiment and output are saved in `watch_log.txt` and `part_e_results.txt` and uploaded in 'Part_E' folder.
 
 # Lab 5 Part 2: Overnight Sensation
 
