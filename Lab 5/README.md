@@ -71,6 +71,11 @@ This readme.md page in your own repository should be edited to include the work 
 ## Part A. 
 ### Set up your Pi for on-device AI
 
+
+***** ### Part A: On-Device AI Setup
+
+For Part A, we prepared the Raspberry Pi 5 to run artificial-intelligence models locally. We created a Python virtual environment and installed the required packages from `requirements.txt`, including Ultralytics YOLO and its dependencies. We downloaded the YOLO26 nano model and exported it to NCNN format so that it could run more efficiently on the Raspberry Pi. We tested the model on an example image and generated an annotated output image with bounding boxes around the detected objects. We also installed Ollama and downloaded the `qwen3.5:0.8b` and `qwen3:0.6b` language models. These models run directly on the Raspberry Pi without sending data to an external server. YOLO is used to observe the environment, while Qwen interprets and describes the observations. We included a screenshot of the installed models using `ollama list` and saved the generated detection images as evidence.******
+
 Create a virtual environment and install the requirements. They include `ultralytics` (YOLO), which pulls in torch, so this takes a while:
 
 ```
