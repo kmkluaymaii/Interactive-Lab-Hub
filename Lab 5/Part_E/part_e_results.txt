@@ -1,0 +1,8 @@
+Loading yolo26n_ncnn_model for NCNN inference...
+08:01:34 1 person(s) at center/close
+
+1 lines saved to watch_log.txt
+asking Qwen...
+
+Qwen (17.1 s):
+The camera recorded 1 person present at the center or close to it for a duration of 61 seconds. No other people were observed during this period. The only change noted was that the number of people remained constant at one throughout the entire observation window.
