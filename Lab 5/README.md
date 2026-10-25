@@ -221,6 +221,19 @@ Consider how you might use this position based approach to create an interaction
 
 \*\*\***Include a screenshot or short video of the hand pose demo, and write how you might use face, hand or body pose tracking in your observant system.**\*\*\*
 
+++++++++++++++++++++++++++++++++++++++++++++++++
+### Part C: MediaPipe Hand-Pose Experiment
+
+We included a short video of the MediaPipe hand-pose demo running on the Raspberry Pi. The video shows the webcam detecting the hand and placing colored landmark points over the fingers and face. The system tracks the hand continuously while displaying the processing speed in frames per second. As the hand moves near the face and the fingers change position, the landmark points move with it. This demonstrates that MediaPipe can identify hand locations and use their positions to recognize gestures.
+
+### Possible Use in Our Observant System
+
+We could use hand-pose tracking as a touch-free control for our observant overnight system. For example, a raised hand could start monitoring before bed, a closed hand could pause the system, and a specific gesture such as a pinch or Quiet Coyote could confirm a command. Hand gestures would be useful when the user does not want to touch the Raspberry Pi or speak aloud. Face tracking could also detect whether a person is present and whether they are looking toward the device, while body-pose tracking could recognize activities such as sitting, standing, walking, or falling. These pose-based readings could be saved in the night log and summarized by Qwen in the morning.
+
+
+**We uploaded the video named 'Part_C.mp4' to the Lab 5 GitHub repository**
++++++++++++++++++++++++++++++++++++++++++++++
+
 
 ## Part D. 
 ### Reason: run Qwen on the Pi with Ollama
@@ -254,8 +267,46 @@ A 0.8B model is slow and sometimes wrong. It will invent events that are not in 
 
 \*\*\***Ask Qwen three questions to answer. Paste the questions, the answers and how long each took. Try one of them with `qwen3:0.6b` and compare.**\*\*\*
 
+
+++++++++++++++++++++++++++++++++++++++++++++++
+### Part D: Qwen Results
+
+We ran Qwen locally on the Raspberry Pi using Ollama with reasoning disabled. The `qwen3.5:0.8b` model answered the Roosevelt Island question in **11.2 seconds**, but its answer was mostly incorrect because it invented historical information. The smaller `qwen3:0.6b` model answered three ways a Raspberry Pi could observe a room in **9.8 seconds**, giving reasonable examples such as cameras, motion sensors, and environmental sensors. Finally, `qwen3.5:0.8b` analyzed `snap.jpg` in **35.8 seconds** and correctly described the person, mask, hospital gown, couch, and wallpaper. This showed that Qwen can analyze text and images locally, but it can also produce incorrect information. When Qwen is unsure, the device should say that it is uncertain instead of presenting an invented answer as fact.
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
 <details>
-  Q&A here
+  ### Q&A
+
+#### Question 1
+
+**Question:** Tell me a bit about the history of Roosevelt Island.  
+**Model:** `qwen3.5:0.8b`  
+**Time:** 11.2 seconds  
+
+**Answer:** Roosevelt Island was originally built as a private residence for President Franklin D. Roosevelt after his inauguration. It is now a historic landmark and tourist destination known for scenic views and the Roosevelt Island Bridge.
+
+**Evaluation:** This answer was mostly incorrect because the model invented historical information. It did not correctly mention Blackwell’s Island, Welfare Island, the 1973 renaming, or Cornell Tech.
+
+#### Question 2
+
+**Question:** What are three ways a Raspberry Pi can observe a room?  
+**Model:** `qwen3:0.6b`  
+**Time:** 9.8 seconds  
+
+**Answer:** The Raspberry Pi can use cameras or motion sensors, monitor temperature and humidity, and collect information about user activity.
+
+**Evaluation:** This answer was reasonable. The smaller model was faster than the `qwen3.5:0.8b` model.
+
+#### Question 3
+
+**Question:** What is in this photo?  
+**Model:** `qwen3.5:0.8b`  
+**Image:** `snap.jpg`  
+**Time:** 35.8 seconds  
+
+**Answer:** A person wearing a black face mask and a hospital gown is sitting on a brown leather couch against floral wallpaper.
+
+**Evaluation:** This answer was mostly correct because it matched the main contents of the photograph.
 </details>
 
 
