@@ -74,7 +74,24 @@ This readme.md page in your own repository should be edited to include the work 
 
 ***** ### Part A: On-Device AI Setup
 
-For Part A, we prepared the Raspberry Pi 5 to run artificial-intelligence models locally. We created a Python virtual environment and installed the required packages from `requirements.txt`, including Ultralytics YOLO and its dependencies. We downloaded the YOLO26 nano model and exported it to NCNN format so that it could run more efficiently on the Raspberry Pi. We tested the model on an example image and generated an annotated output image with bounding boxes around the detected objects. We also installed Ollama and downloaded the `qwen3.5:0.8b` and `qwen3:0.6b` language models. These models run directly on the Raspberry Pi without sending data to an external server. YOLO is used to observe the environment, while Qwen interprets and describes the observations. We included a screenshot of the installed models using `ollama list` and saved the generated detection images as evidence.******
+For Part A, we prepared the Raspberry Pi 5 to run artificial-intelligence models locally. We created a Python virtual environment and installed the required packages from `requirements.txt`, including Ultralytics YOLO and its dependencies. We downloaded the YOLO26 nano model and exported it to NCNN format so that it could run more efficiently on the Raspberry Pi. We tested the model on an example image and generated an annotated output image with bounding boxes around the detected objects. We also installed Ollama and downloaded the `qwen3.5:0.8b` and `qwen3:0.6b` language models. These models run directly on the Raspberry Pi without sending data to an external server. YOLO is used to observe the environment, while Qwen interprets and describes the observations. We included a screenshot of the installed models using `ollama list` and saved the generated detection images as evidence.
+**Original webcam image**
+
+<img width="640" height="480" alt="snap_original" src="https://github.com/user-attachments/assets/eb1a182e-5dcd-47ee-b10d-5b825ba54d0d" />
+
+
+**YOLO annotated image**
+
+<img width="640" height="480" alt="snap_box" src="https://github.com/user-attachments/assets/e3db542c-4b30-4d08-921b-d7184387834f" />
+
+
+**OLAMA setup**
+
+<img width="826" height="464" alt="image" src="https://github.com/user-attachments/assets/ba39a87e-9cbf-408c-8510-444b1845252f" />
+
+
+
+******
 
 Create a virtual environment and install the requirements. They include `ultralytics` (YOLO), which pulls in torch, so this takes a while:
 
