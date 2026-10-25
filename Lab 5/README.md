@@ -312,9 +312,12 @@ We ran Qwen locally on the Raspberry Pi using Ollama with reasoning disabled. Th
 
 ### Part E: YOLO-to-Qwen Pipeline
 
-We connected the YOLO person detector to Qwen through a complete observation pipeline. YOLO detected people in the camera image, and the interpreter converted each detection into a text description containing the number of people, their position, and their distance from the camera. The system saved only changes in the scene to `watch_log.txt`. Qwen then used this text log to summarize what happened during the observation period. In our experiment, the system detected nobody, one person, and two people at different positions and distances. We also included the terminal screenshot, observation log, and complete program output as evidence.
+We connected the YOLO person detector to Qwen through a complete observation pipeline. YOLO detected people in the camera image, and the interpreter converted each detection into a text description containing the number of people, their position, and their distance from the camera. The system saved only changes in the scene to `watch_log.txt`. Qwen then used this text log to summarize what happened during the observation period. In our experiment, the system detected nobody, one person, and two people at different positions and distances. We also included the terminal screenshot, observation log, and complete program output as evidence. We uploaded the two Part E files, watch_log.txt and part_e_results.txt, inside the Part_E folder.
 
 Files: [`watch_log.txt`](watch_log.txt), [`part_e_results.txt`](part_e_results.txt), and [`Part_E_terminal.png`](Part_E_terminal.png).
+
+
+**observation log**
 
 <img width="852" height="974" alt="image" src="https://github.com/user-attachments/assets/8b486f2b-0d8f-4080-8a03-0f0d5709b68c" />
 
