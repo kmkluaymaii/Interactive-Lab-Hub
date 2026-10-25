@@ -184,16 +184,16 @@ Then press q to quit and run it again with a flag. Each one changes a single thi
 
 \*\*\***Include a short video or screenshots of your experiments with the person detection. Write down three situations where it did not see you, or saw a person who was not there, and what you think the cause was.**\*\*\*
 
-***************
+*************************************************
 ### Part B: Person-Detection Experiments
 
 We included a short video showing our person-detection experiments with YOLO running on the Raspberry Pi. The video shows the camera detecting a person, displaying a bounding box, and reporting the confidence score in the terminal. We tested different positions and movements to observe how the detector responded.
 
 The detector did not always work perfectly. First, when we moved farther away from the camera, the person was sometimes missed because the person occupied fewer pixels in the image. Second, when we turned sideways or became partially hidden, the detector became less confident because less of the body was visible. Third, when we showed a photograph of a person, YOLO could recognize it as a person even though nobody was physically standing there. This happened because the model detects visual patterns that look like a person; it does not know whether the person is real or only printed in a photograph.
 
-**video**
+**The video is added inside lab 5 folder named 'Part_B.mp4'**
 
-*************
+******************************************************
 
 ## Part C. 
 ### See more: hands and pose with MediaPipe
