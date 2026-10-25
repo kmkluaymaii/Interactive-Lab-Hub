@@ -2,37 +2,9 @@
 
 **Team:**
 
-**Members:** Afroza Aktar (aa2995), Lamiah Khan, 
+**Members:** Afroza Aktar (aa2995), Lamiah Khan, Rawisara Chairat, Xiaoxi Xu, 
 
 **Project name:**
-
-
-## Overview
-
-**Part 1: the tools**
-
-A) [Set up your Pi for on-device AI](#part-a)
-
-B) [See: recognize people in real time with YOLO](#part-b)
-
-C) [See more: hands and pose with MediaPipe](#part-c)
-
-D) [Reason: run Qwen on the Pi with Ollama](#part-d)
-
-E) [Connect: from YOLO readings to Qwen reasoning](#part-e)
-
-**Part 2: Overnight Sensation**
-
-F) [Read Part 2 and storyboard your night-time interaction](#part-f)
-
-G) [Design the interaction before bed](#part-g)
-
-H) [Incorporate the observant system during sleep](#part-h)
-
-I) [Design the interaction when awake](#part-i)
-
-The tools from earlier versions of this lab (MobileNet, Teachable Machine, Moondream, audio analysis, classic OpenCV) live in the [legacy folder](legacy/README.md). They are optional, but any of them can be the sensor in your Part 2 system.
-
 
 # Part 1
 
