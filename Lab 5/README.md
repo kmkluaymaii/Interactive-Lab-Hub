@@ -127,8 +127,12 @@ Stuck? A kitchen that tells you who raided the fridge. A desk that reports wheth
 Use storyboards and/or [Verplank diagrams](https://ccrma.stanford.edu/courses/250a-fall-2004/IDSketchbok.pdf).
 
 \*\*\***Insert ideas, sketches, Verplank diagrams and storyboards for your night-time interaction here.**\*\*\*
+
 Story board: 
 <img width="1163" height="580" alt="Screenshot 2026-10-28 at 5 05 17 PM" src="https://github.com/user-attachments/assets/9c58a03a-cdd8-4b00-a379-9f541eff6b6a" />
+
+Block diagram of Moonlight Device: 
+<img width="928" height="461" alt="Screenshot 2026-10-28 at 5 09 46 PM" src="https://github.com/user-attachments/assets/3a0c5289-e7fc-47a8-be21-354958a32c47" />
 
 
 ## Prep for Part 2
