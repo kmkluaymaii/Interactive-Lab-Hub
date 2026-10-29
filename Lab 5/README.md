@@ -148,8 +148,10 @@ Block diagram of Moonlight Device:
     The device will live in Rawisara and Cici's apartment in the house, near their bed side table so it can track their phone correctly.
    
 6. Revise your storyboard with the feedback and with what you learned in Part E about where the pipeline breaks.
-
+Jessica suggested clarifying how we distinguish phone use from reading a book, so we will point Moonlight’s camera at a designated phone spot on the nightstand and use YOLO to detect whether a phone is present. Jianing questioned the five-minute wait and how we detect pickup and put-down actions, so we will sample the spot every 10 seconds throughout the night. When the phone disappears, we will record a potential phone-use session, and when it returns and stays in place, we will log the session’s duration. Sessions lasting at least five minutes will be flagged as potential doomscrolling, rather than waiting five minutes to begin tracking. We will keep the Moonlight lamp, voice activation before bed, overnight logging, and morning summary. To protect privacy, all processing will happen locally, and we will save session times and durations instead of photos or videos.
 \*\*\***Post your revised storyboard here.**\*\*\*
+<img width="789" height="519" alt="Screenshot 2026-10-29 at 5 56 21 PM" src="https://github.com/user-attachments/assets/d10ca14d-4ceb-4376-8731-0640c3a3ee45" />
+
 
 ## Part G. 
 ### Design the interaction before
@@ -157,6 +159,20 @@ Block diagram of Moonlight Device:
 The hand-off: the person tells the device what to watch tonight, and the device acknowledges it. Keep it to a thirty-second ritual. A button or a touch (Lab 4), a spoken sentence (Lab 3), a wave or a Quiet Coyote at the camera (Part C). The acknowledgement can be a line on the display, a tone, or an LED that dims rather than lights up. At its simplest, the hand-off just sets the question that the morning will answer.
 
 \*\*\***Describe the interaction before.**\*\*\*
+1. User places phone
+- Places phone in the designated spot on the nightstand.
+
+2. User activates Moonlight
+- Presses the button and says: “It's time to sleep. Track my nighttime phone use.”
+
+3. Moonlight acknowledges
+- Moonlight: “Got it! I'll check your phone spot every 10 seconds and summarize your nighttime phone use in the morning.”
+- The crescent moon LED softly dims to indicate tracking has started.
+  
+4. The night begins
+- Moonlight monitors the designated phone spot throughout the night.
+- Morning question: How often and how long did I use my phone last night?
+<img width="573" height="479" alt="Screenshot 2026-10-29 at 6 03 48 PM" src="https://github.com/user-attachments/assets/9126448f-7479-428c-97b5-f9ae743db7b4" />
 
 ## Part H. 
 ### Incorporate the observant system
