@@ -127,7 +127,7 @@ Stuck? A kitchen that tells you who raided the fridge. A desk that reports wheth
 Use storyboards and/or [Verplank diagrams](https://ccrma.stanford.edu/courses/250a-fall-2004/IDSketchbok.pdf).
 
 \*\*\***Insert ideas, sketches, Verplank diagrams and storyboards for your night-time interaction here.**\*\*\*
-
+For our project, we are creating a moonlight-inspired bedside device that tracks nighttime phone use to help people understand their doomscrolling habits. Before bed, the user activates the tracker with a voice command, and the device monitors for phone use throughout the night. If phone use lasts longer than five minutes, it starts a timer and logs the session until the phone is put down, repeating this process overnight without saving photos or videos. In the morning, the user presses a button to receive a summary of how many times they doomscrolled and how long each session lasted, helping them reflect on their sleep habits.
 Story board: 
 <img width="1163" height="580" alt="Screenshot 2026-10-28 at 5 05 17 PM" src="https://github.com/user-attachments/assets/9c58a03a-cdd8-4b00-a379-9f541eff6b6a" />
 
@@ -139,9 +139,15 @@ Block diagram of Moonlight Device:
 
 1. Look at and give feedback on the Part F storyboards.
    **Put the feedback for your ideas here.**
-2. [Update your Lab Hub](prep.md#get-the-latest-content) to get the latest content for Part 2.
-3. Decide where the device will spend the night and who else lives there. Get their OK before the first run.
-4. Revise your storyboard with the feedback and with what you learned in Part E about where the pipeline breaks.
+   Jessica Chon (GitHub: https://github.com/chonjessica23/Interactive-Lab-Hub/blob/Fall2026/Lab%205/README.md): I think your idea   is pretty useful, and the overall process seems pretty straightforward! My only question is how are you guys tracking the phone? Are you attaching sensors to it or using the models? Because my first question was wondering how would you distinguish the user from reading a book for example.
+
+   Jianing Li: I love the interaction you designed especially the little moonlight lamp! I'm curious why did you set the 5-minute wait because if I pick up an scroll my phone for 5 minutes only, it might not be able to detect. And also, you might need to think more detailed about how your system detects the pick-up and put-down action, like maybe sample once every 10 seconds to see if the phone's still there or not?
+
+3. [Update your Lab Hub](prep.md#get-the-latest-content) to get the latest content for Part 2.
+4. Decide where the device will spend the night and who else lives there. Get their OK before the first run.
+    The device will live in Rawisara and Cici's apartment in the house, near their bed side table so it can track their phone correctly.
+   
+6. Revise your storyboard with the feedback and with what you learned in Part E about where the pipeline breaks.
 
 \*\*\***Post your revised storyboard here.**\*\*\*
 
