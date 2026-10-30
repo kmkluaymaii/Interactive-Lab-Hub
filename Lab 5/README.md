@@ -1,8 +1,8 @@
 # Observant Systems: Overnight Sensation
 
-**Team:** A little confused on this but it will be submitted under Rawisara Chairat's canvas   <br>
+**Team:** LACK   <br>
 **Members:** Rawisara Chairat (rc2239, kmkluaymaii), Lamiah Khan (ltk38, khanlamiah019), Afroza Aktar (aa2995, Afrozaktar), Xiaoxi Xu (xx373, xuxx21) <br>
-**Project name:** 
+**Project name:** Moonlight
 
 # Part 1
 
