@@ -1,52 +1,85 @@
-"""
-Part I, the smallest possible version: turn night_log.jsonl into a three-sentence
-morning report. Use it to check your thirty-second fake nights, then replace it with your
-own reveal (a display, a voice, a plot, a servo...).
 
-    python morning.py                          # print the report
-    python morning.py --model qwen3:0.6b
-    python morning.py --log some_other.jsonl
-"""
 import argparse
-import collections
 import json
+from datetime import datetime
 
 import requests
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--log", default="night_log.jsonl")
+parser.add_argument("--log", default="doomscroll_log.jsonl")
 parser.add_argument("--model", default="qwen3.5:0.8b")
 args = parser.parse_args()
 
-entries = [json.loads(line) for line in open(args.log) if line.strip()]
-readings = [e for e in entries if "reading" in e]
-seen = [e for e in readings if e["reading"] != "nobody"]
-beats = sum(1 for e in entries if e.get("alive"))
-per_hour = dict(sorted(collections.Counter(e["t"][11:13] + ":00" for e in seen).items()))
-digest = "\n".join(f'{e["t"][11:19]} {e["reading"]}' for e in seen[-200:])   # keep the prompt small
+with open(args.log, encoding="utf-8") as f:
+    entries = [json.loads(line) for line in f if line.strip()]
 
-span = f"{entries[0]['t'][11:16]} to {entries[-1]['t'][11:16]}" if entries else "no entries"
-print(f"{len(readings)} changes, {len(seen)} with something in view, {beats} heartbeats, {span}")
-print("changes per hour:", per_hour)
+# Select completed phone sessions
+sessions = [
+    e for e in entries
+    if e.get("event") == "phone_session_end"
+]
 
-if not seen:                                   # nothing to summarize: say so, do not ask the model
-    print(f"\nQuiet night. The camera watched from {span} and saw nobody.")
+doomscroll_sessions = [
+    e for e in sessions if e.get("doomscrolling", False)
+]
+
+total_minutes = sum(
+    e.get("duration_minutes", 0) for e in sessions
+)
+
+def format_time(epoch):
+    return datetime.fromtimestamp(epoch).strftime("%I:%M %p")
+
+# Create a compact summary for the LLM
+digest = "\n".join(
+    f"Phone use from {format_time(e['start_epoch'])} "
+    f"to {format_time(e['end_epoch'])}, "
+    f"duration {e['duration_minutes']:.1f} minutes, "
+    f"doomscrolling: {e['doomscrolling']}"
+    for e in sessions
+)
+
+print(f"Total phone sessions: {len(sessions)}")
+print(f"Total phone use: {total_minutes:.1f} minutes")
+print(f"Doomscrolling sessions: {len(doomscroll_sessions)}")
+
+if not sessions:
+    print("\nNo completed phone sessions were recorded.")
     raise SystemExit
 
-prompt = f"""You are a bedside night-watch device. The camera watched from {span}. Below is what it saw,
-one line per change (time reading). Changes per hour: {per_hour}.
+prompt = f"""
+You are a playful bedside companion giving a morning report.
+
+Here is last night's phone-use data:
 
 {digest}
 
-Write a warm three-sentence morning report. Mention the most unusual moment and when it happened.
-Only use facts from the log."""
+Write a warm, slightly playful three-sentence morning report.
 
-r = requests.post("http://localhost:11434/api/generate", json={
-    "model": args.model,
-    "prompt": prompt,
-    "think": False,
-    "stream": False,
-    "options": {"num_ctx": 4096, "temperature": 0.3},
-}, timeout=600)
+Include:
+- How much time was spent using the phone
+- Whether any doomscrolling was detected
+- One interesting observation about the night's behavior
+
+Only use facts supported by the log.
+Avoid judgmental language.
+"""
+
+r = requests.post(
+    "http://localhost:11434/api/generate",
+    json={
+        "model": args.model,
+        "prompt": prompt,
+        "think": False,
+        "stream": False,
+        "options": {
+            "num_ctx": 4096,
+            "temperature": 0.3
+        },
+    },
+    timeout=600
+)
+
 r.raise_for_status()
-print("\n" + r.json()["response"])
+print("\nMorning Report:\n")
+print(r.json()["response"])
