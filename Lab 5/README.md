@@ -329,29 +329,6 @@ The interaction is designed to be simple and require minimal effort from the use
 **In the morning:** The user presses the button again. The LED turns off, and the system automatically generates a spoken summary of the previous night's phone activity.
 
 Instead of requiring the user to look through logs or statistics, the system communicates the results through a short, friendly morning report.
-### Overnight Test — October 30, 2026
-
-We ran Moonlight from **2:30:03 AM to 8:34:43 AM**, approximately **6 hours and 5 minutes**. The camera sampled the phone’s resting spot every **5 seconds**, using a **30-second testing threshold** for possible doomscrolling.
-
-| Metric | Recorded Result |
-|---|---:|
-| Phone-away sessions | 15 |
-| Total recorded phone-away time | 359.6 minutes |
-| Sessions meeting the testing threshold | 10 |
-| Final continuous absence | 290.7 minutes |
-
-The system stopped normally and saved the event logs. The morning report summarized the recorded sessions using Python-calculated statistics, a Qwen-generated closing sentence, and Piper speech output.
-<img width="935" height="818" alt="Screenshot 2026-10-30 at 9 11 58 AM" src="https://github.com/user-attachments/assets/021f47ff-d4f1-4ea8-80fd-32d61b9d043e" />
-<img width="936" height="771" alt="Screenshot 2026-10-30 at 9 12 28 AM" src="https://github.com/user-attachments/assets/be104084-1237-43de-9eb3-480b68201360" />
-
-
-#### Observation: Low-Light Detection Failure
-
-I likely turned off the room light around the beginning of the final prolonged absence, at approximately 3:44 AM. Reduced visibility may have prevented YOLO from detecting the phone, causing the system to interpret it as removed from its resting spot.
-
-The final absence continued until monitoring stopped at 8:34 AM. Its end reason was `monitor_stopped`, rather than `phone_returned`. Therefore, the recorded 290.7-minute absence does not establish that the phone was being used during that time.
-
-This test exposed an important limitation: the current system cannot reliably distinguish **phone removal** from **failed detection in darkness**. The recorded absence durations should not be treated as confirmed phone-use or scrolling time.
 
 
 ### Testing and Iteration
@@ -411,6 +388,30 @@ This iteration improved the reliability of the system by separating **factual ca
 ### Full System Demonstration
 
 The following demonstration shows the complete interaction, from starting nighttime monitoring with the Qwiic Button to detecting phone absence and generating the spoken morning report.
+
+### Overnight Test — October 30, 2026
+
+We ran Moonlight from **2:30:03 AM to 8:34:43 AM**, approximately **6 hours and 5 minutes**. The camera sampled the phone’s resting spot every **5 seconds**, using a **30-second testing threshold** for possible doomscrolling.
+
+| Metric | Recorded Result |
+|---|---:|
+| Phone-away sessions | 15 |
+| Total recorded phone-away time | 359.6 minutes |
+| Sessions meeting the testing threshold | 10 |
+| Final continuous absence | 290.7 minutes |
+
+The system stopped normally and saved the event logs. The morning report summarized the recorded sessions using Python-calculated statistics, a Qwen-generated closing sentence, and Piper speech output.
+<img width="935" height="818" alt="Screenshot 2026-10-30 at 9 11 58 AM" src="https://github.com/user-attachments/assets/021f47ff-d4f1-4ea8-80fd-32d61b9d043e" />
+<img width="936" height="771" alt="Screenshot 2026-10-30 at 9 12 28 AM" src="https://github.com/user-attachments/assets/be104084-1237-43de-9eb3-480b68201360" />
+
+
+#### Observation: Low-Light Detection Failure
+
+I likely turned off the room light around the beginning of the final prolonged absence, at approximately 3:44 AM. Reduced visibility may have prevented YOLO from detecting the phone, causing the system to interpret it as removed from its resting spot.
+
+The final absence continued until monitoring stopped at 8:34 AM. Its end reason was `monitor_stopped`, rather than `phone_returned`. Therefore, the recorded 290.7-minute absence does not establish that the phone was being used during that time.
+
+This test exposed an important limitation: the current system cannot reliably distinguish **phone removal** from **failed detection in darkness**. The recorded absence durations should not be treated as confirmed phone-use or scrolling time.
 
 **Video demonstration:**
 
