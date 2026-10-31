@@ -299,7 +299,8 @@ Before going to sleep, the user places their phone in the designated spot and pr
 
 **Final prototype:**
 
-[Insert prototype image]
+<img width="797" height="545" alt="Screenshot 2026-10-31 at 5 36 32 PM" src="https://github.com/user-attachments/assets/815e8a6f-4267-4b4c-9ecb-9f69315ba12d" />
+
 
 ### System Workflow: Works Like
 
