@@ -111,7 +111,10 @@ Two flavors, pick one or mix them:
 
 Two house rules. Sample rather than stream: one look every 5 to 30 seconds is plenty, and it keeps the Pi cool. And keep everything on the Pi: tell the people you live with, point the camera at things rather than at beds, and delete the snapshots after the demo.
 
-## Part F. 
+## Part F.
+### Storyboard our night-time interaction
+<details>
+<summary>Instruction (click to expand)</summary>
 ### Read Part 2 and storyboard your night-time interaction
 
 Storyboard a night-time interaction built on your observant system, in three panels:
@@ -123,10 +126,11 @@ Storyboard a night-time interaction built on your observant system, in three pan
 Stuck? A kitchen that tells you who raided the fridge. A desk that reports whether you actually went to bed. A window that names the quietest hour. A plant that describes its night. Find something better.
 
 Use storyboards and/or [Verplank diagrams](https://ccrma.stanford.edu/courses/250a-fall-2004/IDSketchbok.pdf).
+</details>
 
-\*\*\***Insert ideas, sketches, Verplank diagrams and storyboards for your night-time interaction here.**\*\*\*
 For our project, we are creating a moonlight-inspired bedside device that tracks nighttime phone use to help people understand their doomscrolling habits. Before bed, the user activates the tracker with a voice command, and the device monitors for phone use throughout the night. If phone use lasts longer than five minutes, it starts a timer and logs the session until the phone is put down, repeating this process overnight without saving photos or videos. In the morning, the user presses a button to receive a summary of how many times they doomscrolled and how long each session lasted, helping them reflect on their sleep habits.
-Story board: 
+
+Storyboard: 
 <img width="1163" height="580" alt="Screenshot 2026-10-28 at 5 05 17 PM" src="https://github.com/user-attachments/assets/9c58a03a-cdd8-4b00-a379-9f541eff6b6a" />
 
 Block diagram of Moonlight Device: 
@@ -135,28 +139,33 @@ Block diagram of Moonlight Device:
 
 ## Prep for Part 2
 
-1. Look at and give feedback on the Part F storyboards.
-   **Put the feedback for your ideas here.**
-   Jessica Chon (GitHub: https://github.com/chonjessica23/Interactive-Lab-Hub/blob/Fall2026/Lab%205/README.md): I think your idea   is pretty useful, and the overall process seems pretty straightforward! My only question is how are you guys tracking the phone? Are you attaching sensors to it or using the models? Because my first question was wondering how would you distinguish the user from reading a book for example.
+1. Feedback on the Part F storyboards:
+   - Jessica Chon (GitHub: https://github.com/chonjessica23/Interactive-Lab-Hub/blob/Fall2026/Lab%205/README.md): I think your idea   is pretty useful, and the overall process seems pretty straightforward! My only question is how are you guys tracking the phone? Are you attaching sensors to it or using the models? Because my first question was wondering how would you distinguish the user from reading a book for example.
 
-   Jianing Li: I love the interaction you designed especially the little moonlight lamp! I'm curious why did you set the 5-minute wait because if I pick up an scroll my phone for 5 minutes only, it might not be able to detect. And also, you might need to think more detailed about how your system detects the pick-up and put-down action, like maybe sample once every 10 seconds to see if the phone's still there or not?
+   - Jianing Li: I love the interaction you designed especially the little moonlight lamp! I'm curious why did you set the 5-minute wait because if I pick up an scroll my phone for 5 minutes only, it might not be able to detect. And also, you might need to think more detailed about how your system detects the pick-up and put-down action, like maybe sample once every 10 seconds to see if the phone's still there or not?
 
-3. [Update your Lab Hub](prep.md#get-the-latest-content) to get the latest content for Part 2.
-4. Decide where the device will spend the night and who else lives there. Get their OK before the first run.
+2. [Update your Lab Hub](prep.md#get-the-latest-content) to get the latest content for Part 2.
+3. Decide where the device will spend the night and who else lives there. Get their OK before the first run.
     The device will live in Rawisara and Cici's apartment in the house, near their bed side table so it can track their phone correctly.
    
-6. Revise your storyboard with the feedback and with what you learned in Part E about where the pipeline breaks.
+4. Revise your storyboard with the feedback and with what you learned in Part E about where the pipeline breaks.
 Jessica suggested clarifying how we distinguish phone use from reading a book, so we will point Moonlight’s camera at a designated phone spot on the nightstand and use YOLO to detect whether a phone is present. Jianing questioned the five-minute wait and how we detect pickup and put-down actions, so we will sample the spot every 10 seconds throughout the night. When the phone disappears, we will record a potential phone-use session, and when it returns and stays in place, we will log the session’s duration. Sessions lasting at least five minutes will be flagged as potential doomscrolling, rather than waiting five minutes to begin tracking. We will keep the Moonlight lamp, voice activation before bed, overnight logging, and morning summary. To protect privacy, all processing will happen locally, and we will save session times and durations instead of photos or videos.
-\*\*\***Post your revised storyboard here.**\*\*\*
+
+**Our revised storyboard:**
+
+
 <img width="789" height="519" alt="Screenshot 2026-10-29 at 5 56 21 PM" src="https://github.com/user-attachments/assets/d10ca14d-4ceb-4376-8731-0640c3a3ee45" />
 
 
 ## Part G. 
 ### Design the interaction before
+<details>
+<summary>Instruction (click to expand)</summary>
 
 The hand-off: the person tells the device what to watch tonight, and the device acknowledges it. Keep it to a thirty-second ritual. A button or a touch (Lab 4), a spoken sentence (Lab 3), a wave or a Quiet Coyote at the camera (Part C). The acknowledgement can be a line on the display, a tone, or an LED that dims rather than lights up. At its simplest, the hand-off just sets the question that the morning will answer.
+</details>
 
-\*\*\***Describe the interaction before.**\*\*\*
+**The interaction before.**
 1. User places phone
 - Places phone in the designated spot on the nightstand.
 
