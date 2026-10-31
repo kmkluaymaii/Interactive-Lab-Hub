@@ -389,7 +389,14 @@ This iteration improved the reliability of the system by separating **factual ca
 
 The following demonstration shows the complete interaction, from starting nighttime monitoring with the Qwiic Button to detecting phone absence and generating the spoken morning report.
 
-### Overnight Test — October 30, 2026
+#### Video demonstration:
+
+
+
+https://github.com/user-attachments/assets/49106251-219b-4c27-80a6-be0d86028033
+
+
+#### Overnight Test — October 30, 2026
 
 We ran Moonlight from **2:30:03 AM to 8:34:43 AM**, approximately **6 hours and 5 minutes**. The camera sampled the phone’s resting spot every **5 seconds**, using a **30-second testing threshold** for possible doomscrolling.
 
@@ -405,7 +412,7 @@ The system stopped normally and saved the event logs. The morning report summari
 <img width="936" height="771" alt="Screenshot 2026-10-30 at 9 12 28 AM" src="https://github.com/user-attachments/assets/be104084-1237-43de-9eb3-480b68201360" />
 
 
-#### Observation: Low-Light Detection Failure
+##### Observation: Low-Light Detection Failure
 
 I likely turned off the room light around the beginning of the final prolonged absence, at approximately 3:44 AM. Reduced visibility may have prevented YOLO from detecting the phone, causing the system to interpret it as removed from its resting spot.
 
@@ -413,9 +420,6 @@ The final absence continued until monitoring stopped at 8:34 AM. Its end reason 
 
 This test exposed an important limitation: the current system cannot reliably distinguish **phone removal** from **failed detection in darkness**. The recorded absence durations should not be treated as confirmed phone-use or scrolling time.
 
-**Video demonstration:**
-
-[Insert Final Demo Video]
 
 ## Deliverables & Submission for Lab 5
 
