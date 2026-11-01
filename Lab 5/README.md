@@ -141,16 +141,14 @@ Block diagram of Moonlight Device:
 
 ## Prep for Part 2
 
-1. Feedback on the Part F storyboards:
+1. **Feedback on the Part F storyboards:**
    - Jessica Chon (GitHub: https://github.com/chonjessica23/Interactive-Lab-Hub/blob/Fall2026/Lab%205/README.md): I think your idea   is pretty useful, and the overall process seems pretty straightforward! My only question is how are you guys tracking the phone? Are you attaching sensors to it or using the models? Because my first question was wondering how would you distinguish the user from reading a book for example.
 
    - Jianing Li: I love the interaction you designed especially the little moonlight lamp! I'm curious why did you set the 5-minute wait because if I pick up an scroll my phone for 5 minutes only, it might not be able to detect. And also, you might need to think more detailed about how your system detects the pick-up and put-down action, like maybe sample once every 10 seconds to see if the phone's still there or not?
 
-2. [Update your Lab Hub](prep.md#get-the-latest-content) to get the latest content for Part 2.
-3. Decide where the device will spend the night and who else lives there. Get their OK before the first run.
-    The device will live in Rawisara and Cici's apartment in the house, near their bed side table so it can track their phone correctly.
+2. The device will **live in Rawisara and Xiaoxi's apartment in the House**, near their bed side table so it can track their phone correctly.
    
-4. Revise your storyboard with the feedback and with what you learned in Part E about where the pipeline breaks.
+3. **Revise our storyboard with the feedback:**
 Jessica suggested clarifying how we distinguish phone use from reading a book, so we will point Moonlight’s camera at a designated phone spot on the nightstand and use YOLO to detect whether a phone is present. Jianing questioned the five-minute wait and how we detect pickup and put-down actions, so we will sample the spot every 10 seconds throughout the night. When the phone disappears, we will record a potential phone-use session, and when it returns and stays in place, we will log the session’s duration. Sessions lasting at least five minutes will be flagged as potential doomscrolling, rather than waiting five minutes to begin tracking. We will keep the Moonlight lamp, voice activation before bed, overnight logging, and morning summary. To protect privacy, all processing will happen locally, and we will save session times and durations instead of photos or videos.
 
 **Our revised storyboard:**
