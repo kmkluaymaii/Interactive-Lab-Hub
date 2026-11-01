@@ -101,7 +101,8 @@ Files: [`watch_log.txt`](watch_log.txt), [`part_e_results.txt`](part_e_results.t
 
 
 # Lab 5 Part 2: Overnight Sensation
-
+<details>
+<summary>Instruction (click to expand)</summary>
 For Part 2, you will use the observant system from Part 1 to design a night-time interaction. On-device AI is slow, so let it work while you sleep. The person meets the device twice: **before bed**, when they hand the night over, and **when awake**, when the device gives something back. In between, the pipeline from Part E runs on its own.
 
 Two flavors, pick one or mix them:
@@ -110,6 +111,7 @@ Two flavors, pick one or mix them:
 * **Process all night.** You already have the data (a day of phone photos, a long recording) and the Pi needs hours to get through it.
 
 Two house rules. Sample rather than stream: one look every 5 to 30 seconds is plenty, and it keeps the Pi cool. And keep everything on the Pi: tell the people you live with, point the camera at things rather than at beds, and delete the snapshots after the demo.
+</details>
 
 ## Part F.
 ### Storyboard our night-time interaction
