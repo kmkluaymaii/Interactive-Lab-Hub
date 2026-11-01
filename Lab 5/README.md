@@ -230,7 +230,10 @@ To test the system without running it overnight, we simulated a nighttime sessio
 The demo shows how `doomscroll_detector_group.py` detects phone absence, tracks its duration, and records possible doomscrolling events when the threshold is exceeded.
 
 **Video demonstration:**
-[Insert fake night demo video]
+
+https://github.com/user-attachments/assets/fcfcd453-4e20-4024-b035-c5f444a12ca5
+
+
 
 
 ## Part I. 
