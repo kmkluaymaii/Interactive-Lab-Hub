@@ -1,6 +1,6 @@
 # Distributed Interaction
 
-**NAMES OF COLLABORATORS HERE**
+**Members:** Rawisara Chairat (rc2239, kmkluaymaii), Lamiah Khan (ltk38, khanlamiah019), Afroza Aktar (aa2995, Afrozaktar), Xiaoxi Xu (xx373, xuxx21)
 
 For submission, replace this section with your documentation!
 
