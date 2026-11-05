@@ -2,67 +2,32 @@
 
 **Members:** Rawisara Chairat (rc2239, kmkluaymaii), Lamiah Khan (ltk38, khanlamiah019), Afroza Aktar (aa2995, Afrozaktar), Xiaoxi Xu (xx373, xuxx21)
 
-For submission, replace this section with your documentation!
-
----
-
-## Prep
-
-1. Pull the new changes
-2. Read: [The Presence Table](https://dl.acm.org/doi/10.1145/1935701.1935800) ([video](https://vimeo.com/15932020))
-
-## Overview
-
-Build interactive systems where **multiple devices communicate over a network** using MQTT messaging. Work in teams of 3+ with Raspberry Pis.
-
-**Parts:**
-- A: Learn MQTT messaging
-- B: Try collaborative pixel grid demo  
-- C: Build your own distributed system
-
----
-
 ## Part A: MQTT Messaging
+For Part A, we learned how devices communicate using MQTT. MQTT uses a publisher–subscriber model with a central broker. We connected to the Cornell MQTT broker at farlab.infosci.cornell.edu:1883 and subscribed to the IDD/# topic. We then published test messages using different topics for movement, ingredient transfer, ingredient spawning, recipe submission, and winner announcements. The MQTT viewer and subscriber terminal successfully displayed these messages, showing that the messages were transmitted through the broker. These topics will later support communication between the three Raspberry Pis in our Shake the Plate! game.
+<br><br>
 
-MQTT = lightweight messaging for IoT. Publish/subscribe model with central broker.
+**Figure 1 & 2. MQTT Message Viewer displaying the distributed game messages.**
 
-**Concepts:**
-- **Broker**: `farlab.infosci.cornell.edu:1883`
-- **Topic**: Like `IDD/bedroom/temperature` (use `#` wildcard)
-- **Publish/Subscribe**: Send and receive messages
+<img width="1864" height="878" alt="Screenshot (181)" src="https://github.com/user-attachments/assets/85956ce8-bd1b-432f-9184-74bf961495a5" />
 
-**Install MQTT tools on your Pi:**
-```bash
-sudo apt-get update
-sudo apt-get install -y mosquitto-clients
-```
+<img width="1857" height="818" alt="Screenshot (182)" src="https://github.com/user-attachments/assets/4fe475e5-3a06-409c-9b09-2d94f4426ccf" />
 
-**Test it:**
+<br><br>
 
-**Subscribe to messages (listener):**
-```bash
-mosquitto_sub -h farlab.infosci.cornell.edu -p 1883 -t 'IDD/#' -u idd -P 'device@theFarm'
-```
+**Figure 3. Raspberry Pi terminal showing the commands used to publish messeges.**
 
-**Publish a message (sender):**
-```bash
-mosquitto_pub -h farlab.infosci.cornell.edu -p 1883 -t 'IDD/test/yourname' -m 'Hello!' -u idd -P 'device@theFarm'
-```
 
-> **💡 Tips:**
-> - Replace `yourname` with your actual name in the topic
-> - Use single quotes around the password: `'device@theFarm'`
-> - For your own projects, publish under your team's topic space: `IDD/<yourteam>/...` (for example `IDD/team3/bedroom/light`). Everyone shares one broker login, so anything you publish can reach everyone's projects.
+<img width="1144" height="957" alt="Screenshot (183)" src="https://github.com/user-attachments/assets/f8a434ba-e7e0-434b-8c06-bb6c7bc5aab2" />
 
-**🔧 Debug Tool:** View all MQTT messages in real-time at `http://farlab.infosci.cornell.edu:5001`
+<br><br>
 
-![MQTT Explorer showing messages](imgs/MQTT-explorer.png)
+**Figure 4. Subscriber terminal receiving the published MQTT messages from the broker, confirming successful device-to-device communication.**
 
-**💡 Brainstorm 5 ideas for messaging between devices**
 
-MQTT agrees on almost nothing in advance: you invent the topics and what the messages mean. Smart-home standards like Matter fix the vocabulary instead (every "light" behaves the same). Keep this trade-off in mind when you design your topics in Part C.
+<img width="902" height="846" alt="Screenshot (184)" src="https://github.com/user-attachments/assets/650a192a-19d3-40c6-b4ff-4179d768f19c" />
 
----
+<br><br>
+
 
 ## Part B: Collaborative Pixel Grid
 
