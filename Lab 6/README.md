@@ -510,6 +510,18 @@ def on_food_received(message):
 
 **Design details to tune:** sensor sensitivity; pixels moved per swipe; ingredient speed variation; sprite overlap and submission-zone collision rules; food entrance position and safe transfer timing; initial ingredient distribution; and first-winner synchronization across Pis.
 
+#### Game Demonstration
+
+The following video demonstrates the complete gameplay of
+**Shake the Plate!**, including gesture-based ingredient movement,
+MQTT transfers between Raspberry Pis, recipe submissions,
+and the winner announcement.
+
+
+https://github.com/user-attachments/assets/4277a730-be0d-4ec4-91bf-ed929505df4b
+
+
+
 ### 4. User Testing
 
 We tested the game with three people outside our team. Each person used a Raspberry Pi and APDS-9960 sensor to move ingredients, transfer food, and complete a recipe.
