@@ -392,24 +392,87 @@ A designated game coordinator running on one Raspberry Pi manages the synchroniz
 
 ### 3. Build Documentation
 
-#### Planned hardware and software
+#### Hardware and software
 
 - **3 Raspberry Pis**, each with a PiTFT (or other compatible display).
 - **3 APDS-9960 sensors**, connected through I²C/Qwiic (one per Pi).
 - **Python + Pygame** to render the plate, ingredients, submission zone, recipe progress, and animations.
 - **Adafruit APDS-9960 library** to read the three directional gestures.
 - **Paho MQTT** to exchange ingredient-transfer events, recipe progress, and the winner announcement.
+- **Pillow + Adafruit RGB Display library** to scale and display the Pygame interface on the Mini PiTFT.
 - Network access to the lab's shared MQTT broker.
 
-**Photos and screenshots to add after building:**
-- [ ] Pi 1, sensor, and screen
-- [ ] Pi 2, sensor, and screen
-- [ ] Pi 3, sensor, and screen
-- [ ] Food moving and entering the submission zone
-- [ ] An ingredient leaving one Pi and appearing on another
-- [ ] Recipe progress and first-place winner screen
+- The game uses two main Python files:
 
-#### Planned MQTT topics
+| File | Purpose |
+| --- | --- |
+| `shake_the_plate.py` | Main game logic, gestures, ingredient movement, MQTT communication, recipe progress, and winner detection. |
+| `run_on_minitft.py` | Displays the Pygame game on the Mini PiTFT and maps the physical buttons to keyboard inputs. |
+
+#### Running the Game on Mini PiTFT
+
+The game is drawn at **320 × 240** in Pygame. The `run_on_minitft.py` launcher runs it without an external monitor, scales each frame to fit the **240 × 135** Mini PiTFT while preserving the aspect ratio, and outputs frames to the SPI display using the ST7789 driver. It also maps the PiTFT's physical buttons to game controls and limits display refreshes to **15 frames per second**.
+
+**1. Prepare each Raspberry Pi**
+
+From the `Lab 6` folder, activate the virtual environment and install the dependencies:
+
+```bash
+cd ~/Interactive-Lab-Hub/"Lab 6"
+python3 -m venv .venv  # First-time setup only
+source .venv/bin/activate
+pip install -r requirements-pi.txt
+pip install pygame Pillow adafruit-circuitpython-rgb-display
+```
+
+If the existing screen service occupies the Mini PiTFT, stop it first:
+
+```bash
+sudo systemctl stop piscreen.service
+```
+
+**2. Start one instance on each Pi**
+
+Each Pi runs the same launcher, using a different required `--pi-id` argument:
+
+| Device | Recipe | Command |
+| --- | --- | --- |
+| Pi 1 | Burger (coordinator) | `python run_on_minitft.py --pi-id pi1` |
+| Pi 2 | Salad | `python run_on_minitft.py --pi-id pi2` |
+| Pi 3 | Sushi | `python run_on_minitft.py --pi-id pi3` |
+
+All three Pis must be connected to the MQTT broker. When everyone is ready, press the **GPIO23** button on Pi 1 to start the shared round.
+
+**3. Physical button and gesture controls**
+
+| Input | Action |
+| --- | --- |
+| GPIO23 (Space) | Start the round on Pi 1 |
+| GPIO24 (Escape) | Quit the game |
+| APDS-9960 swipe left | Shake ingredients left; food crossing the edge moves to the previous Pi |
+| APDS-9960 swipe right | Shake ingredients right; food crossing the edge moves to the next Pi |
+| APDS-9960 swipe up | Submit the valid ingredients in the center zone |
+
+The GPIO buttons control **starting and quitting**, while the APDS-9960 gestures control gameplay.
+
+**4. Test the game without a sensor or Mini PiTFT**
+
+To run the regular Pygame version with simulated sensor gestures:
+
+```bash
+python shake_the_plate.py --pi-id pi1 --no-sensor
+```
+
+Use the **left**, **right**, and **up** arrow keys to simulate gestures, **Space** to start the game on Pi 1, and **Escape** to quit.
+
+To restore the PiTFT's normal screen service afterward, if needed:
+
+```bash
+sudo systemctl start piscreen.service
+```
+
+
+#### MQTT topics
 
 Use a team-specific prefix such as `IDD/shakeplate/` (change to a unique team namespace before deployment):
 
@@ -424,11 +487,12 @@ Use a team-specific prefix such as `IDD/shakeplate/` (change to a unique team na
 | `IDD/shakeplate/pi1/progress` | Burger ingredients successfully submitted. |
 | `IDD/shakeplate/pi2/progress` | Salad ingredients successfully submitted. |
 | `IDD/shakeplate/pi3/progress` | Sushi ingredients successfully submitted. |
-| `IDD/shakeplate/game/winner` | Announces the winning player and recipe when a player finishes first. |
-| `IDD/shakeplate/game/start`	| Synchronize the beginning of the round. |
-| `IDD/shakeplate/game/spawn`	| Publish ingredient spawning events, including ingredient type, unique ID, destination Pi, and wave number. |
+| `IDD/shakeplate/game/start` | Synchronize the beginning of the round. |
+| `IDD/shakeplate/game/spawn` | Publish ingredient spawning events, including ingredient type, unique ID, destination Pi, and wave number. |
+| `IDD/shakeplate/game/complete` | Send a recipe completion claim to the coordinator. |
+| `IDD/shakeplate/game/winner` | Announce the winning player and recipe when someone finishes first. |
 
-Example MQTT ingredient-transfer payload:
+*Example ingredient-transfer payload:**
 
 ```json
 {
@@ -441,11 +505,11 @@ Example MQTT ingredient-transfer payload:
 }
 ```
 
-Each food object has an ID to track individual ingredients. A transfer ID allows safe acknowledgement and duplicate detection. To avoid a dropped message losing food, the sender marks a crossing item **in transit** rather than immediately destroying it. The receiver acknowledges the item, and the sender removes it from the active plate only after the acknowledgement. A retry must not create duplicate ingredients.
+Each food object has an ID to track individual ingredients. A transfer ID supports acknowledgements and duplicate detection. To prevent a dropped message from losing an ingredient, the sender marks crossing food **in transit** instead of immediately deleting it. The receiver acknowledges the ingredient; the sender then removes it from its active plate. A retried transfer should not create duplicate food.
 
-For the competitive race, each Pi publishes its recipe progress. A designated game coordinator (which can run on one Pi) receives completion events, decides the first valid winner, and publishes one authoritative `game/winner` message so all screens end the round consistently. We will finalize synchronization, simultaneous-win handling, and reconnection behavior during implementation.
+Each Pi publishes its recipe progress. Pi 1 acts as the coordinator, receives completion claims, decides the first valid winner, and publishes one authoritative `game/winner` message so all three screens end the round consistently.
 
-#### Planned Game Logic (Illustrative Pseudocode)
+#### Game Logic (Illustrative Pseudocode)
 
 ```python
 RECIPES = {
@@ -504,12 +568,11 @@ def on_food_received(message):
         record_transfer_id(message["transfer_id"])
     acknowledge_transfer(message)
 
-
 # Coordinator validates completion and publishes game/winner.
 # All Pis stop accepting gestures once a winner is announced.
 ```
 
-**Design details to tune:** sensor sensitivity; pixels moved per swipe; ingredient speed variation; sprite overlap and submission-zone collision rules; food entrance position and safe transfer timing; initial ingredient distribution; and first-winner synchronization across Pis.
+The pseudocode summarizes the main gameplay flow; the runnable implementation is in `shake_the_plate.py`. The Mini PiTFT launcher is separate and does not change the MQTT or recipe logic.
 
 #### Game Demonstration
 
