@@ -512,27 +512,28 @@ def on_food_received(message):
 
 ### 4. User Testing
 
-**Not yet conducted.** We will test with at least **two people outside the team**, record photos/video with permission, and gather their feedback.
-
-- **Participants and setup:** [To add]
-- **What they thought before trying:** [To add]
-- **What surprised them:** [To add]
-- **What they would change:** [To add]
-- **Observed problems with gestures, transferring food, or submissions:** [To add]
-- **Changes made after testing:** [To add]
-- **Photos/video links:** [To add]
-
-Suggested tasks: shake without losing a needed ingredient; deliberately pass food to another player; successfully submit two needed ingredients together; try a batch containing a wrong ingredient; race to complete a recipe before the other players; verify that the winner appears on all three screens.
+We tested the game with three people outside our team. Each person used a Raspberry Pi and APDS-9960 sensor to move ingredients, transfer food, and complete a recipe.
+- **Participants and setup**: Three people played the game using three Raspberry Pis, three displays, and three APDS-9960 sensors.
+- **What they thought before trying:** They understood that it was a cooking race and that each player needed to collect ingredients for their own recipe.
+- **What surprised them:** They were surprised that their gestures could move ingredients to another Raspberry Pi through MQTT.
+- **What they enjoyed:** All three participants had fun shaking the plate, exchanging ingredients, and racing to finish their recipes.
+- **What they would change:** They suggested adding more ingredients, making the game longer, and adding sound effects.
+- **Observed problems:** Sometimes players moved ingredients too far or accidentally sent an ingredient to another Pi. They also needed a little time to learn the gesture controls.
+- **Changes made after testing:** We explained the controls more clearly and adjusted the movement so the game was easier to understand.
+- **Photos/video links:** Photos and videos of the three-person testing session are included in the GitHub repository.
+The test showed that the game was enjoyable and that MQTT made the interaction feel like one shared game across three separate Raspberry Pis.
 
 ### 5. Reflection
 
-**To be completed after implementation and user testing.**
+**What worked well**: The three Raspberry Pis communicated successfully through MQTT. Ingredients moved between screens, and all three players could play together. The participants had fun shaking the plates and racing to finish their recipes.
 
-- **What worked well:** [To add]
-- **Challenges with distributed interaction:** [To add — MQTT delivery, network delays, synchronization of the winner, dropped or duplicate transfers]
-- **How sensor events behaved:** [To add — gesture sensitivity and swipe detection]
-- **Where computation happened and why:** Planned design processes gestures, physics-like sprite motion, submission checks, and graphics on each Pi. MQTT carries transfer/progress events but does not render or calculate food motion. [Confirm after building]
-- **What we would improve:** [To add]
+**Challenges with distributed interaction:** We had to make sure all Pis used the same MQTT broker and topics. Small network delays sometimes made an ingredient appear a little later on another screen.
+
+**How sensor events behaved:** The APDS-9960 detected left, right, and up gestures. Some gestures moved the ingredients farther than expected, so players needed a little practice.
+
+**Where computation happened and why:** Each Pi processed its own gestures, moved its ingredients, checked submissions, and displayed its game screen. MQTT only sent information about ingredient transfers, submissions, and the winner between Pis.
+
+**What we would improve:** We would add clearer instructions, sound effects, smoother movement, and stronger visual feedback when an ingredient is transferred or submitted. We would also make the game longer and add more recipes.
 
 ---
 
