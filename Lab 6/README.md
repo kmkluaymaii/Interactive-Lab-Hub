@@ -35,8 +35,10 @@ For Part B, we built a distributed color-display system using the APDS-9960 sens
 
 The APDS-9960 detects the red, green, and blue values of an object placed near the sensor. The Raspberry Pi publishes these RGB values to the MQTT broker. The Flask server receives the MQTT message and sends it to the browser using WebSockets. The browser then displays each Raspberry Pi as a colored pixel.
 
+
 The system works as follows:
 
+```text
 Colored object
       ↓
 APDS-9960 sensor
@@ -48,8 +50,8 @@ MQTT broker
 Flask server
       ↓
 Web browser grid
+```
 
-<br> <br>
 
 **Figure 1. APDS-9960 color sensor connected to the Raspberry Pi using the Qwiic connector.**
 
