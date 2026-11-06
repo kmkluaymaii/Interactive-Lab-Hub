@@ -524,16 +524,29 @@ https://github.com/user-attachments/assets/4277a730-be0d-4ec4-91bf-ed929505df4b
 
 ### 4. User Testing
 
-We tested the game with three people outside our team. Each person used a Raspberry Pi and APDS-9960 sensor to move ingredients, transfer food, and complete a recipe.
-- **Participants and setup**: Three people played the game using three Raspberry Pis, three displays, and three APDS-9960 sensors.
-- **What they thought before trying:** They understood that it was a cooking race and that each player needed to collect ingredients for their own recipe.
-- **What surprised them:** They were surprised that their gestures could move ingredients to another Raspberry Pi through MQTT.
+We tested **Shake the Plate!** with three participants outside our team. Each participant used a Raspberry Pi equipped with a display and an APDS-9960 gesture sensor to move ingredients, transfer food between devices, and race to complete their recipe.
+
+#### User Testing Video
+The following video captures their interactions with the game,
+including how they learned the gesture controls, transferred
+ingredients between devices, and competed to complete
+their recipes.
+
+https://github.com/user-attachments/assets/e0b3c19c-ed3a-4907-a554-8be951f33ca7
+
+#### Observations and Feedback
+
+- **Participants and setup**: Three participants played simultaneously using three Raspberry Pis, each equipped with a display and an APDS-9960 sensor.
+- **What they thought before trying:** Participants understood the goal of collecting and submitting three ingredients to complete their assigned recipes.
+- **What surprised them:** Participants were surprised that swiping ingredients off one screen could transfer them to another Raspberry Pi through MQTT.
 - **What they enjoyed:** All three participants had fun shaking the plate, exchanging ingredients, and racing to finish their recipes.
-- **What they would change:** They suggested adding more ingredients, making the game longer, and adding sound effects.
-- **Observed problems:** Sometimes players moved ingredients too far or accidentally sent an ingredient to another Pi. They also needed a little time to learn the gesture controls.
-- **Changes made after testing:** We explained the controls more clearly and adjusted the movement so the game was easier to understand.
-- **Photos/video links:** Photos and videos of the three-person testing session are included in the GitHub repository.
-The test showed that the game was enjoyable and that MQTT made the interaction feel like one shared game across three separate Raspberry Pis.
+- **What they would change:** They suggested adding more ingredients and sound effects to make the game more engaging.
+- **Observed problems:** Some participants initially struggled with controlling ingredient movement and accidentally transferred ingredients they needed to other players.
+- **Changes made after testing:**  Based on the feedback, we added more ingredients to make the gameplay more dynamic and challenging. We also clarified the gesture instructions and adjusted ingredient movement to make the controls easier to use.
+  
+#### Key Takeaways
+The testing showed that participants enjoyed the competitive gameplay and the interaction between multiple Raspberry Pis. MQTT enabled the three devices to function as one connected game, while the gesture-based controls made the experience interactive and playful. The feedback also highlighted opportunities to improve movement precision, provide clearer instructions, and add sound effects.
+
 
 ### 5. Reflection
 
