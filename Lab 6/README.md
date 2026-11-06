@@ -31,64 +31,49 @@ For Part A, we learned how devices communicate using MQTT. MQTT uses a publisher
 
 ## Part B: Collaborative Pixel Grid
 
-Each Pi = one pixel, controlled by RGB sensor, displayed in real-time grid.
+For Part B, we built a distributed color-display system using the APDS-9960 sensor, Raspberry Pi, MQTT, Flask, and a web browser. Each Raspberry Pi acts as one pixel in a shared grid.
 
-**Architecture:** `Pi (sensor) → MQTT → Server → Web Browser`
+The APDS-9960 detects the red, green, and blue values of an object placed near the sensor. The Raspberry Pi publishes these RGB values to the MQTT broker. The Flask server receives the MQTT message and sends it to the browser using WebSockets. The browser then displays each Raspberry Pi as a colored pixel.
 
-**Setup:**
+The system works as follows:
 
-1. **Sensor**
+text
+Colored object
+      ↓
+APDS-9960 sensor
+      ↓
+Raspberry Pi
+      ↓
+MQTT broker
+      ↓
+Flask server
+      ↓
+Web browser grid
 
-#### Light/Proximity/Gesture sensor (APDS-9960)
-We use this sensor [Adafruit APDS-9960](https://www.adafruit.com/product/3595) for this exmaple to detect light (also RGB)
- 
-<img src="https://cdn-shop.adafruit.com/970x728/3595-06.jpg" width=200>
+<br> <br>
 
-Connect it to your pi with Qwiic connector
+**Figure 1. APDS-9960 color sensor connected to the Raspberry Pi using the Qwiic connector.**
 
 
-<img src="imgs/IMG_0270.jpg" height="200" />
-We need to use the screen to display the color detection, so we need to stop the running piscreen.service to make your screen available again
+<img width="2048" height="1550" alt="image" src="https://github.com/user-attachments/assets/21a5d2f9-a092-4cc1-9717-419231ceb919" />
 
-```bash
-# stop the screen service
-sudo systemctl stop piscreen.service
-```
+<br> <br>
 
-if you want to restart the screen service
-```bash
-# start the screen service
-sudo systemctl start piscreen.service
-```
- 
-2. **Server** (one person on laptop):
-```bash
-cd "Lab 6"
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements-server.txt
-python app.py
-```
+**Figure 2. Raspberry Pi terminal grid and publishing sensor readings.**
 
-2. **View in browser:**
-   - Grid: `http://farlab.infosci.cornell.edu:5000`
-   - Controller: `http://farlab.infosci.cornell.edu:5000/controller`
+<img width="2494" height="1367" alt="Screenshot From 2026-11-06 16-24-00" src="https://github.com/user-attachments/assets/b9531177-7405-49e6-b9dc-2f0addaae904" />
 
-3. **Pi publisher** (everyone on their Pi):
-```bash
-# First time setup - create virtual environment
-cd "Lab 6"
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements-pi.txt
 
-# Run the publisher
-python pixel_grid_publisher.py
-```
+<br> <br>
 
-Hold colored objects near sensor to change your pixel!
+**Figure 3.APDS-9960 color sensor connected to a Raspberry Pi with a Mini PiTFT display, showing the detected RGB values while a colored object is held in front of the sensor.**
 
-![Pixel grid with two devices](imgs/two-devices-grid.png)
+<img width="1572" height="1430" alt="image" src="https://github.com/user-attachments/assets/4f44cf61-9e47-4c9d-b9cf-d81a1237fca7" />
+
+
+<br> <br>
+
+
 
 **📸 Include: Screenshot of grid + photo of your Pi setup**
 
