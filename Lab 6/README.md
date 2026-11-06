@@ -75,9 +75,6 @@ Web browser grid
 <br> <br>
 
 
-
-**📸 Include: Screenshot of grid + photo of your Pi setup**
-
 ---
 
 ## Part C: Make Your Own
@@ -283,7 +280,7 @@ Players move food by making left, right, and up hand gestures over the **APDS-99
 
 **Competition rule:** There is one shared round with a synchronized start. Players may send ingredients to neighboring Pis intentionally or accidentally. A completed recipe counts only after the player has submitted its required ingredients; having the ingredients on the plate alone does not count.
 
-#### Planned interactions and controls
+#### Interactions and controls
 
 | APDS-9960 gesture | Game behavior |
 | --- | --- |
@@ -291,7 +288,7 @@ Players move food by making left, right, and up hand gestures over the **APDS-99
 | **Swipe right** | Shake all ingredients right. Ingredients that cross the **right screen boundary** are automatically passed to the next Pi. |
 | **Swipe up** | Try to submit **all ingredients currently inside the center submission zone**. The submission succeeds only if **every item is required and not already submitted**. |
 
-We will **not use swipe down, double-swipes, or a physical button**. All three interactions use the APDS-9960. The game does not require selecting food with a cursor.
+We do not use swipe down or double-swipes. All ingredient interactions use the APDS-9960 sensor, while the Mini PiTFT's physical buttons are used only to start and quit the game. Players do not need to select ingredients with a cursor.
 
 #### Shaking and food movement
 
@@ -492,7 +489,7 @@ Use a team-specific prefix such as `IDD/shakeplate/` (change to a unique team na
 | `IDD/shakeplate/game/complete` | Send a recipe completion claim to the coordinator. |
 | `IDD/shakeplate/game/winner` | Announce the winning player and recipe when someone finishes first. |
 
-*Example ingredient-transfer payload:**
+**Example ingredient-transfer payload:**
 
 ```json
 {
@@ -606,7 +603,7 @@ https://github.com/user-attachments/assets/e0b3c19c-ed3a-4907-a554-8be951f33ca7
 - **What they enjoyed:** All three participants had fun shaking the plate, exchanging ingredients, and racing to finish their recipes.
 - **What they would change:** They suggested adding more ingredients and sound effects to make the game more engaging.
 - **Observed problems:** Some participants initially struggled with controlling ingredient movement and accidentally transferred ingredients they needed to other players.
-- **Changes made after testing:**  Based on the feedback, we added more ingredients to make the gameplay more dynamic and challenging. We also clarified the gesture instructions and adjusted ingredient movement to make the controls easier to use.
+- **Changes made after testing:**  Based on the feedback, we increased the total number of spawned ingredients to 12 to make the game more dynamic and challenging. We also clarified the gesture instructions and adjusted ingredient movement to make the controls easier to use.
   
 #### Key Takeaways
 The testing showed that participants enjoyed the competitive gameplay and the interaction between multiple Raspberry Pis. MQTT enabled the three devices to function as one connected game, while the gesture-based controls made the experience interactive and playful. The feedback also highlighted opportunities to improve movement precision, provide clearer instructions, and add sound effects.
@@ -620,7 +617,7 @@ The testing showed that participants enjoyed the competitive gameplay and the in
 
 **How sensor events behaved:** The APDS-9960 detected left, right, and up gestures. Some gestures moved the ingredients farther than expected, so players needed a little practice.
 
-**Where computation happened and why:** Each Pi processed its own gestures, moved its ingredients, checked submissions, and displayed its game screen. MQTT only sent information about ingredient transfers, submissions, and the winner between Pis.
+**Where computation happened and why:** Each Raspberry Pi independently processed APDS-9960 gestures, updated ingredient positions, checked recipe submissions, and rendered its own game screen. Pi 1 acted as the coordinator for synchronized ingredient spawning and winner selection. The MQTT broker handled communication between devices. We distributed computation across the Pis to keep gameplay responsive and avoid relying on a central server for every movement.
 
 **What we would improve:** We would add clearer instructions, sound effects, smoother movement, and stronger visual feedback when an ingredient is transferred or submitted. We would also make the game longer and add more recipes.
 
