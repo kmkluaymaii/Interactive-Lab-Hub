@@ -37,7 +37,6 @@ The APDS-9960 detects the red, green, and blue values of an object placed near t
 
 The system works as follows:
 
-text
 Colored object
       ↓
 APDS-9960 sensor
