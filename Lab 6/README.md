@@ -406,6 +406,17 @@ A designated game coordinator running on one Raspberry Pi manages the synchroniz
 | `shake_the_plate.py` | Main game logic, gestures, ingredient movement, MQTT communication, recipe progress, and winner detection. |
 | `run_on_minitft.py` | Displays the Pygame game on the Mini PiTFT and maps the physical buttons to keyboard inputs. |
 
+
+#### Hardware Setup
+
+The image below shows one of the Raspberry Pi setups used for **Shake the Plate!**. Each Raspberry Pi is connected to a Mini PiTFT display and an APDS-9960 gesture sensor. The sensor detects hand gestures used to move and submit ingredients, while the Mini PiTFT displays the game interface, including the plate, ingredients, and recipe progress.
+
+**Figure 1. Raspberry Pi hardware setup with the Mini PiTFT display running Shake the Plate! and the APDS-9960 gesture sensor connected for gameplay input.**
+
+<img width="3296" height="2182" alt="System" src="https://github.com/user-attachments/assets/c9fa7bd3-1f0f-4485-8aa1-e67924b8f642" />
+
+
+
 #### Running the Game on Mini PiTFT
 
 The game is drawn at **320 × 240** in Pygame. The `run_on_minitft.py` launcher runs it without an external monitor, scales each frame to fit the **240 × 135** Mini PiTFT while preserving the aspect ratio, and outputs frames to the SPI display using the ST7789 driver. It also maps the PiTFT's physical buttons to game controls and limits display refreshes to **15 frames per second**.
